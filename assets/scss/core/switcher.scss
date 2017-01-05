@@ -1,0 +1,38 @@
+// Name:            Switcher
+// Description:     Defines styles for the switcher
+//
+// Component:       `sb-switcher`
+//
+// States:          `sb-active`
+//
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Switcher
+ ========================================================================== */
+
+/*
+ * 1. Deactivate browser history navigation in IE11
+ */
+.sb-switcher {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* 1 */
+    touch-action: cross-slide-y pinch-zoom double-tap-zoom;
+}
+
+/*
+ * Items
+ */
+
+.sb-switcher > :not(.sb-active) { display: none; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-switcher-misc();
+
+// @mixin hook-switcher-misc(){}

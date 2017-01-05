@@ -1,0 +1,98 @@
+/*! UIkit 2.27.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slidenav
+ ========================================================================== */
+/*
+ * 1. Required for `a` elements
+ * 2. Dimension
+ * 3. Style
+ */
+.sb-slidenav {
+  /* 1 */
+  display: inline-block;
+  /* 2 */
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  /* 3 */
+  line-height: 60px;
+  color: rgba(50, 50, 50, 0.4);
+  font-size: 60px;
+  text-align: center;
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ * 3. Required for `a` elements
+ * 4. Style
+ */
+.sb-slidenav:hover,
+.sb-slidenav:focus {
+  /* 2 */
+  outline: none;
+  /* 3 */
+  text-decoration: none;
+  /* 4 */
+  color: rgba(50, 50, 50, 0.7);
+  cursor: pointer;
+}
+/* Active */
+.sb-slidenav:active {
+  color: rgba(50, 50, 50, 0.9);
+}
+/*
+ * Icons
+ */
+.sb-slidenav-previous:before {
+  content: "\f104";
+  font-family: FontAwesome;
+}
+.sb-slidenav-next:before {
+  content: "\f105";
+  font-family: FontAwesome;
+}
+/* Sub-object: `sb-slidenav-position`
+ ========================================================================== */
+/*
+ * Create position context
+ */
+.sb-slidenav-position {
+  position: relative;
+}
+/*
+ * Center vertically
+ */
+.sb-slidenav-position .sb-slidenav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  margin-top: -30px;
+}
+.sb-slidenav-position:hover .sb-slidenav {
+  display: block;
+}
+.sb-slidenav-position .sb-slidenav-previous {
+  left: 20px;
+}
+.sb-slidenav-position .sb-slidenav-next {
+  right: 20px;
+}
+/* Modifier: `sb-slidenav-contrast`
+ ========================================================================== */
+.sb-slidenav-contrast {
+  color: rgba(255, 255, 255, 0.5);
+}
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ */
+.sb-slidenav-contrast:hover,
+.sb-slidenav-contrast:focus {
+  color: rgba(255, 255, 255, 0.7);
+}
+/* Active */
+.sb-slidenav-contrast:active {
+  color: rgba(255, 255, 255, 0.9);
+}

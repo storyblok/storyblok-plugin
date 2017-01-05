@@ -1,0 +1,66 @@
+/*! UIkit 2.27.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Sortable
+ ========================================================================== */
+.sb-sortable {
+  position: relative;
+}
+/*
+ * Deactivate browser touch actions in IE11
+ */
+.sb-sortable > * {
+  touch-action: none;
+}
+/*
+ * Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+.sb-sortable a,
+.sb-sortable img {
+  -webkit-touch-callout: none;
+}
+/*
+ * Remove margin from the last-child
+ */
+.sb-sortable > :last-child {
+  margin-bottom: 0;
+}
+/* Sub-modifier `sb-sortable-dragged`
+ ========================================================================== */
+.sb-sortable-dragged {
+  position: absolute;
+  z-index: 1050;
+  pointer-events: none;
+}
+/* Sub-modifier `sb-sortable-placeholder`
+ ========================================================================== */
+.sb-sortable-placeholder {
+  opacity: 0;
+}
+/* Empty List
+ ========================================================================== */
+.sb-sortable-empty {
+  min-height: 30px;
+}
+/* Sub-object `sb-sortable-handle`
+ ========================================================================== */
+/*
+ * Deactivate browser touch actions in IE11
+ */
+.sb-sortable-handle {
+  touch-action: none;
+}
+/* Hover */
+.sb-sortable-handle:hover {
+  cursor: move;
+}
+/* Sub-object `sb-sortable-moving`
+ ========================================================================== */
+.sb-sortable-moving,
+.sb-sortable-moving * {
+  cursor: move;
+}
+/* Fixes dragging items over iframes */
+.sb-sortable-moving iframe {
+  pointer-events: none;
+}

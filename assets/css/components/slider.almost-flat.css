@@ -1,0 +1,94 @@
+/*! UIkit 2.27.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Slider
+ ========================================================================== */
+/*
+ * RTL Compatibility
+ */
+[data-sb-slider] {
+  direction: ltr;
+}
+html[dir="rtl"] .sb-slider > * {
+  direction: rtl;
+}
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Deactivate browser history navigation in IE11
+ */
+.sb-slider {
+  /* 1 */
+  position: relative;
+  /* 2 */
+  z-index: 0;
+  /* 3 */
+  touch-action: pan-y;
+}
+/*
+ * 1. Reset list style without interfering with grid
+ */
+.sb-slider:not(.sb-grid) {
+  /* 1 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ */
+.sb-slider > * {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/*
+ * Clip child elements
+ */
+.sb-slider-container {
+  overflow: hidden;
+}
+/*
+ * Dragged
+ */
+.sb-slider:not(.sb-drag) {
+  -webkit-transition: -webkit-transform 200ms linear;
+  transition: transform 200ms linear;
+}
+/*
+ * 1. Makes text unselectable
+ */
+.sb-slider.sb-drag {
+  cursor: col-resize;
+  /* 1 */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*
+ * 1. Prevents images and links from being dragged (default browser behavior)
+ * 2. Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+.sb-slider a,
+.sb-slider img {
+  /* 1 */
+  -webkit-user-drag: none;
+  user-drag: none;
+  /* 2 */
+  -webkit-touch-callout: none;
+}
+/*
+ * 1. Prevents images and links from being dragged in Firefox
+ */
+.sb-slider img {
+  pointer-events: none;
+}
+/* Modifier: `sb-slider-fullscreen`
+ ========================================================================== */
+.sb-slider-fullscreen,
+.sb-slider-fullscreen > li {
+  height: 100vh;
+}

@@ -1,0 +1,283 @@
+// Name:            Dropdown
+// Description:     Defines styles for a toggleable dropdown
+//
+// Component:       `sb-dropdown`
+//
+// Sub-objects:     `sb-dropdown-overlay`
+//
+// Modifiers:       `sb-dropdown-blank`
+//                  `sb-dropdown-top`
+//                  `sb-dropdown-bottom`
+//                  `sb-dropdown-left`
+//                  `sb-dropdown-right`
+//                  `sb-dropdown-justify`
+//                  `sb-dropdown-grid`
+//                  `sb-dropdown-width-2`
+//                  `sb-dropdown-width-3`
+//                  `sb-dropdown-width-4`
+//                  `sb-dropdown-width-5`
+//                  `sb-dropdown-stack`
+//                  `sb-dropdown-small`
+//                  `sb-dropdown-navbar`
+//                  `sb-dropdown-scrollable`
+//
+// States:          `sb-open`
+//
+// Uses:            Animation
+//                  Grid: `sb-width-*`
+//                  Panel: `sb-panel`
+//                  Nav: `sb-nav`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$dropdown-z-index:                               970 !default;
+$dropdown-width:                                 200px !default;
+$dropdown-margin-top:                            5px !default;
+$dropdown-padding:                               15px !default;
+$dropdown-background:                            #f5f5f5 !default;
+$dropdown-color:                                 #444 !default;
+$dropdown-font-size:                             1rem !default;
+$dropdown-animation:                             sb-fade !default;
+
+$dropdown-divider-border-width:                  1px !default;
+$dropdown-divider-border:                        #ddd !default;
+
+$dropdown-small-padding:                         5px !default;
+
+$dropdown-navbar-margin:                         0 !default;
+$dropdown-navbar-background:                     #f5f5f5 !default;
+$dropdown-navbar-color:                          #444 !default;
+$dropdown-navbar-animation:                      sb-slide-top-fixed !default;
+
+$dropdown-scrollable-height:                     200px !default;
+
+
+/* ========================================================================
+   Component: Dropdown
+ ========================================================================== */
+
+/*
+ * 1. Hide by default
+ * 2. Set position
+ * 3. Box-sizing is needed for `sb-dropdown-justify`
+ * 4. Set width
+ */
+
+.sb-dropdown,
+.sb-dropdown-blank {
+    /* 1 */
+    display: none;
+    /* 2 */
+    position: absolute;
+    z-index: $dropdown-z-index;
+    /* 3 */
+    box-sizing: border-box;
+    /* 4 */
+    width: $dropdown-width;
+}
+
+/*
+ * Dropdown style
+ * 1. Reset button group whitespace hack
+ */
+
+.sb-dropdown {
+    padding: $dropdown-padding;
+    background: $dropdown-background;
+    color: $dropdown-color;
+    /* 1 */
+    font-size: $dropdown-font-size;
+    vertical-align: top;
+    @include hook-dropdown();
+}
+
+/* Focus */
+.sb-dropdown:focus { outline: none; }
+
+/*
+ * 1. Show dropdown
+ * 2. Set animation
+ * 3. Needed for scale animation
+ */
+
+.sb-open > .sb-dropdown,
+.sb-open > .sb-dropdown-blank {
+    /* 1 */
+    display: block;
+    /* 2 */
+    -webkit-animation: $dropdown-animation 0.2s ease-in-out;
+    animation: $dropdown-animation 0.2s ease-in-out;
+    /* 3 */
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+/* Alignment modifiers
+ ========================================================================== */
+
+/*
+ * Modifier
+ */
+
+.sb-dropdown-top { margin-top: (-1 * $dropdown-margin-top); }
+.sb-dropdown-bottom { margin-top: $dropdown-margin-top; }
+.sb-dropdown-left { margin-left: (-1 * $dropdown-margin-top); }
+.sb-dropdown-right { margin-left: $dropdown-margin-top; }
+
+
+/* Nav in dropdown
+ ========================================================================== */
+
+.sb-dropdown .sb-nav { margin: 0 (-$dropdown-padding); }
+
+
+/* Grid and panel in dropdown
+ ========================================================================== */
+
+/*
+* Vertical gutter
+*/
+
+/*
+ * Grid
+ * Higher specificity to override large gutter
+ */
+
+.sb-grid .sb-dropdown-grid + .sb-dropdown-grid { margin-top: $dropdown-padding; }
+
+/* Panels */
+.sb-dropdown-grid > [class*='sb-width-'] > .sb-panel + .sb-panel { margin-top: $dropdown-padding; }
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    /*
+     * Horizontal gutter
+     */
+
+    .sb-dropdown:not(.sb-dropdown-stack) > .sb-dropdown-grid {
+        margin-left: -$dropdown-padding ;
+        margin-right: -$dropdown-padding;
+    }
+
+    .sb-dropdown:not(.sb-dropdown-stack) > .sb-dropdown-grid > [class*='sb-width-'] {
+        padding-left: $dropdown-padding;
+        padding-right: $dropdown-padding;
+    }
+
+    /*
+     * Column divider
+     */
+
+    .sb-dropdown:not(.sb-dropdown-stack) > .sb-dropdown-grid > [class*='sb-width-']:nth-child(n+2) { border-left: $dropdown-divider-border-width solid $dropdown-divider-border; }
+
+    /*
+     * Width multiplier for dropdown columns
+     */
+
+    .sb-dropdown-width-2:not(.sb-dropdown-stack) { width: ($dropdown-width * 2); }
+    .sb-dropdown-width-3:not(.sb-dropdown-stack) { width: ($dropdown-width * 3); }
+    .sb-dropdown-width-4:not(.sb-dropdown-stack) { width: ($dropdown-width * 4); }
+    .sb-dropdown-width-5:not(.sb-dropdown-stack) { width: ($dropdown-width * 5); }
+
+}
+
+/* Phone landscape and smaller */
+@media (max-width: $breakpoint-small-max) {
+
+    /*
+     * Stack columns and take full width
+     */
+
+    .sb-dropdown-grid > [class*='sb-width-'] { width: 100%; }
+
+    /*
+     * Vertical gutter
+     */
+
+    .sb-dropdown-grid > [class*='sb-width-']:nth-child(n+2) { margin-top: $dropdown-padding; }
+
+}
+
+/*
+* Stack grid columns
+*/
+
+.sb-dropdown-stack > .sb-dropdown-grid > [class*='sb-width-'] { width: 100%; }
+
+.sb-dropdown-stack > .sb-dropdown-grid > [class*='sb-width-']:nth-child(n+2) { margin-top: $dropdown-padding; }
+
+
+
+/* Modifier `sb-dropdown-small`
+ ========================================================================== */
+
+/*
+ * Set min-width and text expands dropdown if needed
+ */
+
+.sb-dropdown-small {
+    min-width: 150px;
+    width: auto;
+    padding: $dropdown-small-padding;
+    white-space: nowrap;
+}
+
+/*
+ * Nav in dropdown
+ */
+
+.sb-dropdown-small .sb-nav { margin: 0 (-$dropdown-small-padding); }
+
+
+/* Modifier: `sb-dropdown-navbar`
+ ========================================================================== */
+
+.sb-dropdown-navbar {
+    margin-top: $dropdown-navbar-margin;
+    background: $dropdown-navbar-background;
+    color: $dropdown-navbar-color;
+    @include hook-dropdown-navbar();
+}
+
+.sb-open > .sb-dropdown-navbar {
+    -webkit-animation: $dropdown-navbar-animation 0.2s ease-in-out;
+    animation: $dropdown-navbar-animation 0.2s ease-in-out;
+}
+
+
+/* Modifier `sb-dropdown-scrollable`
+ ========================================================================== */
+
+/*
+ * Usefull for long lists
+ */
+
+.sb-dropdown-scrollable {
+    overflow-y: auto;
+    max-height: $dropdown-scrollable-height;
+}
+
+
+/* Sub-object: `sb-dropdown-overlay`
+ ========================================================================== */
+
+.sb-dropdown-overlay {
+    @include hook-dropdown-overlay();
+}
+
+
+
+// Hooks
+// ========================================================================
+
+@include hook-dropdown-misc();
+
+// @mixin hook-dropdown(){}
+// @mixin hook-dropdown-navbar(){}
+// @mixin hook-dropdown-overlay(){}
+// @mixin hook-dropdown-misc(){}

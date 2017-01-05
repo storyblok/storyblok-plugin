@@ -1,0 +1,493 @@
+// Name:            Contrast
+// Description:     Utility class to adjust colors for dark or colored blocks
+//
+// Component:       `sb-contrast`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$contrast-color:                                 #fff !default;
+$contrast-inverted-color:                        #444 !default;
+
+//
+// Components
+//
+
+$contrast-base-color:                            $contrast-color !default;
+
+$contrast-base-link-color:                       fade($contrast-color, 70%) !default;
+$contrast-base-link-text-decoration:             none !default;
+$contrast-base-link-hover-color:                 $contrast-color !default;
+$contrast-base-link-hover-text-decoration:       underline !default;
+
+$contrast-base-code-color:                       $contrast-color !default;
+$contrast-base-em-color:                         $contrast-color !default;
+
+$contrast-base-heading-color:                    $contrast-color !default;
+
+$contrast-base-hr-border:                        fade($contrast-color, 20%) !default;
+
+$contrast-nav-side-color:                        $contrast-color !default;
+$contrast-nav-side-hover-background:             fade($contrast-color, 10%) !default;
+$contrast-nav-side-hover-color:                  $contrast-color !default;
+$contrast-nav-side-active-background:            $contrast-color !default;
+$contrast-nav-side-active-color:                 $contrast-inverted-color !default;
+$contrast-nav-side-header-color:                 $contrast-color !default;
+$contrast-nav-side-divider-border:               fade($contrast-color, 20%) !default;
+$contrast-nav-side-nested-color:                 fade($contrast-color, 70%) !default;
+$contrast-nav-side-nested-hover-color:           $contrast-color !default;
+
+$contrast-subnav-color:                          fade($contrast-color, 70%) !default;
+$contrast-subnav-hover-color:                    $contrast-color !default;
+$contrast-subnav-hover-text-decoration:          none !default;
+$contrast-subnav-active-color:                   $contrast-color !default;
+
+$contrast-subnav-line-border:                    fade($contrast-color, 20%) !default;
+
+$contrast-subnav-pill-hover-background:          fade($contrast-color, 70%) !default;
+$contrast-subnav-pill-hover-color:               $contrast-inverted-color !default;
+$contrast-subnav-pill-active-background:         $contrast-color !default;
+$contrast-subnav-pill-active-color:              $contrast-inverted-color !default;
+
+$contrast-tab-border:                            fade($contrast-color, 20%) !default;
+$contrast-tab-color:                             fade($contrast-color, 70%) !default;
+$contrast-tab-hover-border:                      fade($contrast-color, 70%) !default;
+$contrast-tab-hover-background:                  fade($contrast-color, 70%) !default;
+$contrast-tab-hover-color:                       $contrast-inverted-color !default;
+$contrast-tab-active-border:                     fade($contrast-color, 20%) !default;
+$contrast-tab-active-background:                 $contrast-color !default;
+$contrast-tab-active-color:                      $contrast-inverted-color !default;
+
+$contrast-list-line-border:                      fade($contrast-color, 20%) !default;
+
+$contrast-form-border:                           fade($contrast-color, 80%) !default;
+$contrast-form-background:                       fade($contrast-color, 80%) !default;
+$contrast-form-color:                            $contrast-inverted-color !default;
+$contrast-form-focus-border:                     $contrast-color !default;
+$contrast-form-focus-background:                 $contrast-color !default;
+$contrast-form-focus-color:                      $contrast-inverted-color !default;
+
+$contrast-form-placeholder-color:                fade($contrast-inverted-color, 70%) !default;
+
+$contrast-button-background:                     $contrast-color !default;
+$contrast-button-color:                          $contrast-inverted-color !default;
+$contrast-button-hover-background:               fade($contrast-color, 80%) !default;
+$contrast-button-hover-color:                    $contrast-inverted-color !default;
+$contrast-button-active-background:              fade($contrast-color, 70%) !default;
+$contrast-button-active-color:                   $contrast-inverted-color !default;
+
+$contrast-button-primary-background:             #00a8e6 !default;
+$contrast-button-primary-color:                  $contrast-color !default;
+$contrast-button-primary-hover-background:       #35b3ee !default;
+$contrast-button-primary-hover-color:            $contrast-color !default;
+$contrast-button-primary-active-background:      #0091ca !default;
+$contrast-button-primary-active-color:           $contrast-color !default;
+
+$contrast-icon-hover-color:                      fade($contrast-color, 70%) !default;
+$contrast-icon-hover-hover-color:                $contrast-color !default;
+
+$contrast-icon-button-background:                $contrast-color !default;
+$contrast-icon-button-color:                     $contrast-inverted-color !default;
+$contrast-icon-button-hover-background:          fade($contrast-color, 80%) !default;
+$contrast-icon-button-hover-color:               $contrast-inverted-color !default;
+$contrast-icon-button-active-background:         fade($contrast-color, 70%) !default;
+$contrast-icon-button-active-color:              $contrast-inverted-color !default;
+
+$contrast-text-muted-color:                      fade($contrast-color, 60%) !default;
+$contrast-text-primary-color:                    #2d7091 !default;
+
+
+/* ========================================================================
+   Component: Contrast
+ ========================================================================== */
+
+.sb-contrast {
+
+    color: $contrast-base-color;
+
+    // Base
+    // ========================================================================
+
+    //
+    // Link
+    //
+
+    a:not([class]),
+    .sb-link  {
+        color: $contrast-base-link-color;
+        text-decoration: $contrast-base-link-text-decoration;
+    }
+
+    a:not([class]):hover,
+    .sb-link:hover {
+        color: $contrast-base-link-hover-color;
+        text-decoration: $contrast-base-link-hover-text-decoration;
+    }
+
+    //
+    // Code
+    //
+
+    :not(pre) > code,
+    :not(pre) > kbd,
+    :not(pre) > samp {
+        color: $contrast-base-code-color;
+        @include hook-contrast-base-code();
+    }
+
+    //
+    // Emphasize
+    //
+
+    em { color: $contrast-base-em-color; }
+
+    //
+    // Headings
+    //
+
+    h1, h2, h3, h4, h5, h6 { color: $contrast-base-heading-color; }
+
+    //
+    // Horizontal rules
+    //
+
+    hr { border-top-color: $contrast-base-hr-border; }
+
+
+    // Nav
+    // ========================================================================
+
+    .sb-nav li > a,
+    .sb-nav li > a:hover { text-decoration: none; }
+
+    //
+    // Nav Site
+    //
+
+    .sb-nav-side > li > a {
+        color: $contrast-nav-side-color;
+        @include hook-contrast-nav-side();
+    }
+
+    .sb-nav-side > li > a:hover,
+    .sb-nav-side > li > a:focus {
+        background: $contrast-nav-side-hover-background;
+        color: $contrast-nav-side-hover-color;
+        @include hook-contrast-nav-side-hover();
+    }
+
+    .sb-nav-side > li.sb-active > a {
+        background: $contrast-nav-side-active-background;
+        color: $contrast-nav-side-active-color;
+        @include hook-contrast-nav-side-active();
+    }
+
+    // Nav header
+    .sb-nav-side .sb-nav-header {
+        color: $contrast-nav-side-header-color;
+        @include hook-contrast-nav-side-header();
+    }
+
+    // Nav divider
+    .sb-nav-side .sb-nav-divider {
+        border-top-color: $contrast-nav-side-divider-border;
+        @include hook-contrast-nav-side-divider();
+    }
+
+    // Nested items
+    .sb-nav-side ul a { color: $contrast-nav-side-nested-color; }
+    .sb-nav-side ul a:hover { color: $contrast-nav-side-nested-hover-color; }
+
+
+    // Subnav
+    // ========================================================================
+
+    .sb-subnav > * > a {
+        color: $contrast-subnav-color;
+        text-decoration: none;
+        @include hook-contrast-subnav();
+    }
+
+    .sb-subnav > * > a:hover,
+    .sb-subnav > * > a:focus {
+        color: $contrast-subnav-hover-color;
+        text-decoration: $contrast-subnav-hover-text-decoration;
+        @include hook-contrast-subnav-hover();
+    }
+
+    .sb-subnav > .sb-active > a {
+        color: $contrast-subnav-active-color;
+        @include hook-contrast-subnav-active();
+    }
+
+    //
+    // Subnav line
+    //
+
+    .sb-subnav-line > :nth-child(n+2):before {
+        border-left-color: $contrast-subnav-line-border;
+        @include hook-contrast-subnav-line-divider();
+    }
+
+    //
+    // Subnav pill
+    //
+
+    .sb-subnav-pill > * > a:hover,
+    .sb-subnav-pill > * > a:focus {
+        background: $contrast-subnav-pill-hover-background;
+        color: $contrast-subnav-pill-hover-color;
+        text-decoration: none;
+        @include hook-contrast-subnav-pill-hover();
+    }
+
+    .sb-subnav-pill > .sb-active > a {
+        background: $contrast-subnav-pill-active-background;
+        color: $contrast-subnav-pill-active-color;
+        @include hook-contrast-subnav-pill-active();
+    }
+
+
+    // Tab
+    // ========================================================================
+
+    .sb-tab { border-bottom-color: $contrast-tab-border; }
+
+    .sb-tab > li > a {
+        border-color: transparent;
+        color: $contrast-tab-color;
+        @include hook-contrast-tab();
+    }
+
+    .sb-tab > li > a:hover,
+    .sb-tab > li > a:focus,
+    .sb-tab > li.sb-open > a {
+        border-color: $contrast-tab-hover-border;
+        background: $contrast-tab-hover-background;
+        color: $contrast-tab-hover-color;
+        text-decoration: none;
+        @include hook-contrast-tab-hover();
+    }
+
+    /* Active */
+    .sb-tab > li.sb-active > a {
+        border-color: $contrast-tab-active-border;
+        border-bottom-color: transparent;
+        background: $contrast-tab-active-background;
+        color: $contrast-tab-active-color;
+        @include hook-contrast-tab-active();
+    }
+
+    //
+    // Tab center
+    //
+
+    .sb-tab-center { border-bottom-color: $contrast-tab-border; }
+
+    //
+    // Tab grid
+    //
+
+    .sb-tab-grid:before { border-top-color: $contrast-tab-border; }
+
+
+    // List
+    // ========================================================================
+
+    .sb-list-line > li:nth-child(n+2) {
+        border-top-color: $contrast-list-line-border;
+        @include hook-contrast-list-line();
+    }
+
+
+    // Form
+    // ========================================================================
+
+    .sb-form select,
+    .sb-form textarea,
+    .sb-form input:not([type]),
+    .sb-form input[type="text"],
+    .sb-form input[type="password"],
+    .sb-form input[type="datetime"],
+    .sb-form input[type="datetime-local"],
+    .sb-form input[type="date"],
+    .sb-form input[type="month"],
+    .sb-form input[type="time"],
+    .sb-form input[type="week"],
+    .sb-form input[type="number"],
+    .sb-form input[type="email"],
+    .sb-form input[type="url"],
+    .sb-form input[type="search"],
+    .sb-form input[type="tel"],
+    .sb-form input[type="color"] {
+        border-color: $contrast-form-border;
+        background: $contrast-form-background;
+        color: $contrast-form-color;
+        background-clip: padding-box;
+        @include hook-contrast-form();
+
+        &:focus {
+            border-color: $contrast-form-focus-border;
+            background: $contrast-form-focus-background;
+            color: $contrast-form-focus-color;
+            @include hook-contrast-form-focus();
+        }
+    }
+
+    //
+    // Placeholder
+    //
+
+    .sb-form :-ms-input-placeholder { color: $contrast-form-placeholder-color !important; }
+    .sb-form ::-moz-placeholder { color: $contrast-form-placeholder-color; }
+    .sb-form ::-webkit-input-placeholder { color: $contrast-form-placeholder-color; }
+
+
+    // Button
+    // ========================================================================
+
+    .sb-button {
+        color: $contrast-button-color;
+        background: $contrast-button-background;
+        @include hook-contrast-button();
+    }
+
+    .sb-button:hover,
+    .sb-button:focus {
+        background-color: $contrast-button-hover-background;
+        color: $contrast-button-hover-color;
+        @include hook-contrast-button-hover();
+    }
+
+    .sb-button:active,
+    .sb-button.sb-active {
+        background-color: $contrast-button-active-background;
+        color: $contrast-button-active-color;
+        @include hook-contrast-button-active();
+    }
+
+    //
+    // Button primary
+    //
+
+    .sb-button-primary {
+        background-color: $contrast-button-primary-background;
+        color: $contrast-button-primary-color;
+        @include hook-contrast-button-primary();
+    }
+
+    .sb-button-primary:hover,
+    .sb-button-primary:focus {
+        background-color: $contrast-button-primary-hover-background;
+        color: $contrast-button-primary-hover-color;
+        @include hook-contrast-button-primary-hover();
+    }
+
+    .sb-button-primary:active,
+    .sb-button-primary.sb-active {
+        background-color: $contrast-button-primary-active-background;
+        color: $contrast-button-primary-active-color;
+        @include hook-contrast-button-primary-active();
+    }
+
+
+    // Icon
+    // ========================================================================
+
+    //
+    // Icon hover
+    //
+
+    .sb-icon-hover {
+        color: $contrast-icon-hover-color;
+        @include hook-contrast-icon-hover();
+    }
+
+    .sb-icon-hover:hover {
+        color: $contrast-icon-hover-hover-color;
+        @include hook-contrast-icon-hover-hover();
+    }
+
+    //
+    // Icon button
+    //
+
+    .sb-icon-button {
+        background: $contrast-icon-button-background;
+        color: $contrast-icon-button-color;
+        @include hook-contrast-icon-button();
+    }
+
+    .sb-icon-button:hover,
+    .sb-icon-button:focus {
+        background-color: $contrast-icon-button-hover-background;
+        color: $contrast-icon-button-hover-color;
+        @include hook-contrast-icon-button-hover();
+    }
+
+    .sb-icon-button:active {
+        background-color: $contrast-icon-button-active-background;
+        color: $contrast-icon-button-active-color;
+        @include hook-contrast-icon-button-active();
+    }
+
+
+    // Text
+    // ========================================================================
+
+    .sb-text-muted { color: $contrast-text-muted-color !important; }
+    .sb-text-primary { color: $contrast-text-primary-color !important; }
+
+
+    // Misc hook
+    // ========================================================================
+
+    @include hook-contrast-misc();
+
+}
+
+
+// Hooks
+// ========================================================================
+
+// @mixin hook-contrast-base-code(){}
+
+// @mixin hook-contrast-nav-side(){}
+// @mixin hook-contrast-nav-side-hover(){}
+// @mixin hook-contrast-nav-side-active(){}
+// @mixin hook-contrast-nav-side-header(){}
+// @mixin hook-contrast-nav-side-divider(){}
+
+// @mixin hook-contrast-subnav(){}
+// @mixin hook-contrast-subnav-hover(){}
+// @mixin hook-contrast-subnav-active(){}
+// @mixin hook-contrast-subnav-line-divider(){}
+// @mixin hook-contrast-subnav-pill-hover(){}
+// @mixin hook-contrast-subnav-pill-active(){}
+
+// @mixin hook-contrast-tab(){}
+// @mixin hook-contrast-tab-hover(){}
+// @mixin hook-contrast-tab-active(){}
+
+// @mixin hook-contrast-list-line(){}
+
+// @mixin hook-contrast-form(){}
+// @mixin hook-contrast-form-focus(){}
+
+// @mixin hook-contrast-button(){}
+// @mixin hook-contrast-button-hover(){}
+// @mixin hook-contrast-button-active(){}
+// @mixin hook-contrast-button-primary(){}
+// @mixin hook-contrast-button-primary-hover(){}
+// @mixin hook-contrast-button-primary-active(){}
+
+// @mixin hook-contrast-icon-hover(){}
+// @mixin hook-contrast-icon-hover-hover(){}
+// @mixin hook-contrast-icon-button(){}
+// @mixin hook-contrast-icon-button-hover(){}
+// @mixin hook-contrast-icon-button-active(){}
+
+// @mixin hook-contrast-misc(){}

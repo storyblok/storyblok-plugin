@@ -1,0 +1,102 @@
+// Name:            List
+// Description:     Defines styles for ordered and unordered lists
+//
+// Component:       `sb-list`
+//
+// Modifiers:       `sb-list-line`
+//                  `sb-list-striped`
+//                  `sb-list-space`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$list-nested-padding-left:                       20px !default;
+
+$list-line-margin-top:                           5px !default;
+$list-line-border:                               #ddd !default;
+$list-line-border-width:                         1px !default;
+
+$list-striped-padding-vertical:                  5px !default;
+$list-striped-padding-horizontal:                5px !default;
+$list-striped-background:                        #f5f5f5 !default;
+
+$list-space-margin-top:                          10px !default;
+
+
+/* ========================================================================
+   Component: List
+ ========================================================================== */
+
+.sb-list {
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Micro clearfix to make list more robust
+ */
+
+.sb-list > li:before,
+.sb-list > li:after {
+    content: "";
+    display: table;
+}
+
+.sb-list > li:after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-list > li > :last-child { margin-bottom: 0; }
+
+/*
+ * Nested lists
+ */
+
+.sb-list ul {
+    margin: 0;
+    padding-left: $list-nested-padding-left;
+    list-style: none;
+}
+
+
+/* Modifier: `sb-list-line`
+ ========================================================================== */
+
+.sb-list-line > li:nth-child(n+2) {
+    margin-top: $list-line-margin-top;
+    padding-top: $list-line-margin-top;
+    border-top: $list-line-border-width solid $list-line-border;
+    @include hook-list-line();
+}
+
+
+/* Modifier: `sb-list-striped`
+ ========================================================================== */
+
+.sb-list-striped > li {
+    padding: $list-striped-padding-vertical $list-striped-padding-horizontal;
+    @include hook-list-striped();
+}
+
+.sb-list-striped > li:nth-of-type(odd) { background: $list-striped-background; }
+
+
+/* Modifier: `sb-list-space`
+ ========================================================================== */
+
+.sb-list-space > li:nth-child(n+2) { margin-top: $list-space-margin-top; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-list-misc();
+
+// @mixin hook-list-line(){}
+// @mixin hook-list-striped(){}
+// @mixin hook-list-misc(){}

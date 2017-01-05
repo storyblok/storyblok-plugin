@@ -1,0 +1,183 @@
+// Name:            Slidenav
+// Description:     Defines styles for a previous/next navigation between slides
+//
+// Component:       `sb-slidenav`
+//
+// Modifiers:       `sb-slidenav-previous`
+//                  `sb-slidenav-next`
+//                  `sb-slidenav-contrast`
+//
+// Sub-objects:     `sb-slidenav-position`
+//
+// Uses:            Icon: FontAwesome
+//
+// Markup:
+//
+// <!-- sb-slidenav -->
+// <a href="" class="sb-slidenav sb-slidenav-previous"></a>
+// <a href="" class="sb-slidenav sb-slidenav-next"></a>
+//
+// <!-- sb-slidenav-position -->
+// <div class="sb-slidenav-position">
+//     <img src="" alt="">
+//     <a href="" class="sb-slidenav sb-slidenav-previous"></a>
+//     <a href="" class="sb-slidenav sb-slidenav-next"></a>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$slidenav-width:                                 60px !default;
+$slidenav-height:                                $slidenav-width !default;
+$slidenav-color:                                 rgba(50,50,50,0.4) !default;
+$slidenav-font-size:                             60px !default;
+$slidenav-line-height:                           $slidenav-height !default;
+$slidenav-previous-icon:                         "\f104" !default;
+$slidenav-next-icon:                             "\f105" !default;
+
+$slidenav-hover-color:                           rgba(50,50,50,0.7) !default;
+
+$slidenav-active-color:                          rgba(50,50,50,0.9) !default;
+
+$slidenav-position-previous:                     20px !default;
+$slidenav-position-next:                         $slidenav-position-previous !default;
+
+$slidenav-contrast-color:                        rgba(255,255,255,0.5) !default;
+$slidenav-contrast-hover-color:                  rgba(255,255,255,0.7) !default;
+$slidenav-contrast-active-color:                 rgba(255,255,255,0.9) !default;
+
+
+/* ========================================================================
+   Component: Slidenav
+ ========================================================================== */
+
+/*
+ * 1. Required for `a` elements
+ * 2. Dimension
+ * 3. Style
+ */
+
+.sb-slidenav {
+    /* 1 */
+    display: inline-block;
+    /* 2 */
+    box-sizing: border-box;
+    width: $slidenav-width;
+    height: $slidenav-height;
+    /* 3 */
+    line-height: $slidenav-line-height;
+    color: $slidenav-color;
+    font-size: $slidenav-font-size;
+    text-align: center;
+    @include hook-slidenav();
+}
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ * 3. Required for `a` elements
+ * 4. Style
+ */
+
+.sb-slidenav:hover,
+.sb-slidenav:focus { // 1
+    /* 2 */
+    outline: none;
+    /* 3 */
+    text-decoration: none;
+    /* 4 */
+    color: $slidenav-hover-color;
+    cursor: pointer;
+    @include hook-slidenav-hover();
+}
+
+/* Active */
+.sb-slidenav:active {
+    color: $slidenav-active-color;
+    @include hook-slidenav-active();
+}
+
+/*
+ * Icons
+ */
+
+.sb-slidenav-previous:before {
+    content: $slidenav-previous-icon;
+    font-family: FontAwesome;
+}
+
+.sb-slidenav-next:before {
+    content: $slidenav-next-icon;
+    font-family: FontAwesome;
+}
+
+
+/* Sub-object: `sb-slidenav-position`
+ ========================================================================== */
+
+/*
+ * Create position context
+ */
+
+.sb-slidenav-position { position: relative; }
+
+/*
+ * Center vertically
+ */
+
+.sb-slidenav-position .sb-slidenav {
+    display: none;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    margin-top: -($slidenav-height / 2);
+}
+
+.sb-slidenav-position:hover .sb-slidenav { display: block; }
+
+.sb-slidenav-position .sb-slidenav-previous { left: $slidenav-position-previous; }
+.sb-slidenav-position .sb-slidenav-next { right: $slidenav-position-next; }
+
+
+/* Modifier: `sb-slidenav-contrast`
+ ========================================================================== */
+
+.sb-slidenav-contrast {
+    color: $slidenav-contrast-color;
+    @include hook-slidenav-contrast();
+}
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ */
+
+.sb-slidenav-contrast:hover,
+.sb-slidenav-contrast:focus { // 1
+    color: $slidenav-contrast-hover-color;
+    @include hook-slidenav-contrast-hover();
+}
+
+/* Active */
+.sb-slidenav-contrast:active {
+    color: $slidenav-contrast-active-color;
+    @include hook-slidenav-contrast-active();
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-slidenav-misc();
+
+// @mixin hook-slidenav(){}
+// @mixin hook-slidenav-hover(){}
+// @mixin hook-slidenav-active(){}
+// @mixin hook-slidenav-contrast(){}
+// @mixin hook-slidenav-contrast-hover(){}
+// @mixin hook-slidenav-contrast-active(){}
+// @mixin hook-slidenav-misc(){}

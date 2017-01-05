@@ -1,0 +1,173 @@
+// Name:            Progress
+// Description:     Defines styles for progress bars
+//
+// Component:       `sb-progress`
+//
+// Sub-objects:     `sb-progress-bar`
+//
+// Modifiers:       `sb-progress-mini`
+//                  `sb-progress-small`
+//                  `sb-progress-success`
+//                  `sb-progress-warning`
+//                  `sb-progress-danger`
+//                  `sb-progress-striped`
+//
+// Markup:
+//
+// <!-- sb-progress -->
+// <div class="sb-progress">
+//     <div class="sb-progress-bar" style="width: 40%;"></div>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$progress-height:                                20px !default;
+$progress-mini-height:                           6px !default;
+$progress-small-height:                          12px !default;
+
+$progress-margin-vertical:                       15px !default;
+$progress-background:                            #eee !default;
+
+$progress-bar-background:                        #00a8e6 !default;
+$progress-bar-font-size:                         12px !default;
+$progress-bar-color:                             #fff !default;
+
+$progress-bar-success-background:                #8cc14c !default;
+$progress-bar-warning-background:                #faa732 !default;
+$progress-bar-danger-background:                 #da314b !default;
+
+
+/* ========================================================================
+   Component: Progress
+ ========================================================================== */
+
+/*
+ * 1. Clearing
+ * 2. Vertical alignment if text is used
+ */
+
+.sb-progress {
+    box-sizing: border-box;
+    height: $progress-height;
+    margin-bottom: $progress-margin-vertical;
+    background: $progress-background;
+    /* 1 */
+    overflow: hidden;
+    /* 2 */
+    line-height: $progress-height;
+    @include hook-progress();
+}
+
+/*
+ * Add margin if adjacent element
+ */
+
+* + .sb-progress { margin-top: $progress-margin-vertical; }
+
+
+/* Sub-object: `sb-progress-bar`
+ ========================================================================== */
+
+/*
+ * 1. Transition
+ * 2. Needed for text
+ */
+
+.sb-progress-bar {
+    width: 0;
+    height: 100%;
+    background: $progress-bar-background;
+    float: left;
+    /* 1 */
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+    /* 2 */
+    font-size: $progress-bar-font-size;
+    color: $progress-bar-color;
+    text-align: center;
+    @include hook-progress-bar();
+}
+
+
+/* Size modifiers
+ ========================================================================== */
+
+/* Mini */
+.sb-progress-mini {
+    height: $progress-mini-height;
+    @include hook-progress-mini();
+}
+
+
+/* Small */
+.sb-progress-small {
+    height: $progress-small-height;
+    @include hook-progress-small();
+}
+
+
+/* Color modifiers
+ ========================================================================== */
+
+.sb-progress-success .sb-progress-bar {
+    background-color: $progress-bar-success-background;
+    @include hook-progress-bar-success();
+}
+
+.sb-progress-warning .sb-progress-bar {
+    background-color: $progress-bar-warning-background;
+    @include hook-progress-bar-warning();
+}
+
+.sb-progress-danger .sb-progress-bar {
+    background-color: $progress-bar-danger-background;
+    @include hook-progress-bar-danger();
+}
+
+
+/* Modifier: `sb-progress-striped`
+ ========================================================================== */
+
+.sb-progress-striped .sb-progress-bar {
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 30px 30px;
+}
+
+/*
+ * Animation
+ */
+
+.sb-progress-striped.sb-active .sb-progress-bar {
+    -webkit-animation: sb-progress-bar-stripes 2s linear infinite;
+    animation: sb-progress-bar-stripes 2s linear infinite;
+}
+
+@-webkit-keyframes sb-progress-bar-stripes {
+    0% { background-position: 0 0;}
+    100% { background-position: 30px 0; }
+}
+
+@keyframes sb-progress-bar-stripes {
+    0% { background-position: 0 0;}
+    100% { background-position: 30px 0; }
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-progress-misc();
+
+// @mixin hook-progress(){}
+// @mixin hook-progress-bar(){}
+// @mixin hook-progress-mini(){}
+// @mixin hook-progress-small(){}
+// @mixin hook-progress-bar-success(){}
+// @mixin hook-progress-bar-warning(){}
+// @mixin hook-progress-bar-danger(){}
+// @mixin hook-progress-misc(){}

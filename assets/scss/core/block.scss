@@ -1,0 +1,155 @@
+// Name:            Block
+// Description:     Defines styles to create horizontal layout blocks
+//
+// Component:       `sb-block`
+//
+// Modifiers:       `sb-block-large`
+//                  `sb-block-default`
+//                  `sb-block-muted`
+//                  `sb-block-primary`
+//                  `sb-block-secondary`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$block-padding-vertical:                         20px !default;
+$block-padding-vertical-large:                   50px !default;
+
+$block-large-padding-vertical:                   $block-padding-vertical !default;
+$block-large-padding-vertical-medium:            $block-padding-vertical-large !default;
+$block-large-padding-vertical-large:             100px !default;
+
+$block-default-background:                       #fff !default;
+$block-muted-background:                         #f9f9f9 !default;
+$block-primary-background:                       #00a8e6 !default;
+$block-secondary-background:                     #222 !default;
+
+
+/* ========================================================================
+   Component: Block
+ ========================================================================== */
+
+.sb-block {
+    position: relative;
+    box-sizing: border-box;
+    padding-top: $block-padding-vertical;
+    padding-bottom: $block-padding-vertical;
+    @include hook-block();
+}
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .sb-block {
+        padding-top: $block-padding-vertical-large;
+        padding-bottom: $block-padding-vertical-large;
+    }
+
+}
+
+/*
+ * Micro clearfix to make blocks more robust
+ */
+
+.sb-block:before,
+.sb-block:after {
+    content: "";
+    display: table;
+}
+
+.sb-block:after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-block > :last-child { margin-bottom: 0; }
+
+
+/* Padding Modifier
+ ========================================================================== */
+
+/*
+ * Large padding
+ */
+
+.sb-block-large {
+    padding-top: $block-large-padding-vertical;
+    padding-bottom: $block-large-padding-vertical;
+}
+
+/* Tablets and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .sb-block-large {
+        padding-top: $block-large-padding-vertical-medium;
+        padding-bottom: $block-large-padding-vertical-medium;
+    }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .sb-block-large {
+        padding-top: $block-large-padding-vertical-large;
+        padding-bottom: $block-large-padding-vertical-large;
+    }
+
+}
+
+
+/* Color Modifier
+ ========================================================================== */
+
+/*
+ * Default
+ */
+
+.sb-block-default {
+    background: $block-default-background;
+    @include hook-block-default();
+}
+
+/*
+ * Muted
+ */
+
+.sb-block-muted {
+    background: $block-muted-background;
+    @include hook-block-muted();
+}
+
+/*
+ * Primary
+ */
+
+.sb-block-primary {
+    background: $block-primary-background;
+    @include hook-block-primary();
+}
+
+/*
+ * Secondary
+ */
+
+.sb-block-secondary {
+    background: $block-secondary-background;
+    @include hook-block-secondary();
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-block-misc();
+
+// @mixin hook-block(){}
+// @mixin hook-block-default(){}
+// @mixin hook-block-muted(){}
+// @mixin hook-block-secondary(){}
+// @mixin hook-block-primary(){}
+// @mixin hook-block-misc(){}

@@ -1,0 +1,136 @@
+// Name:            Text
+// Description:     Collection of useful text utility classes to style your content
+//
+// Component:       `sb-text-*`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$text-small-font-size:                           11px !default;
+$text-small-line-height:                         16px !default;
+$text-large-font-size:                           18px !default;
+$text-large-line-height:                         24px !default;
+$text-large-font-weight:                         normal !default;
+
+$text-muted-color:                               #999 !default;
+$text-primary-color:                             #2d7091 !default;
+$text-success-color:                             #659f13 !default;
+$text-warning-color:                             #e28327 !default;
+$text-danger-color:                              #d85030 !default;
+$text-contrast-color:                            #fff !default;
+
+
+/* ========================================================================
+   Component: Text
+ ========================================================================== */
+
+/* Size modifiers
+ ========================================================================== */
+
+.sb-text-small {
+    font-size: $text-small-font-size;
+    line-height: $text-small-line-height;
+}
+
+.sb-text-large {
+    font-size: $text-large-font-size;
+    line-height: $text-large-line-height;
+    font-weight: $text-large-font-weight;
+}
+
+
+/* Weight modifiers
+ ========================================================================== */
+
+.sb-text-bold { font-weight: bold; }
+
+
+/* Color modifiers
+ ========================================================================== */
+
+.sb-text-muted { color: $text-muted-color !important; }
+.sb-text-primary { color: $text-primary-color !important; }
+.sb-text-success { color: $text-success-color !important; }
+.sb-text-warning { color: $text-warning-color !important; }
+.sb-text-danger { color: $text-danger-color !important; }
+.sb-text-contrast { color: $text-contrast-color !important; }
+
+
+/* Alignment modifiers
+ ========================================================================== */
+
+.sb-text-left { text-align: left !important; }
+.sb-text-right { text-align: right !important; }
+.sb-text-center { text-align: center !important; }
+.sb-text-justify { text-align: justify !important; }
+
+.sb-text-top { vertical-align: top !important; }
+.sb-text-middle { vertical-align: middle !important; }
+.sb-text-bottom { vertical-align: bottom !important; }
+
+/* Only tablets portrait and smaller */
+@media (max-width: $breakpoint-medium-max) {
+
+    .sb-text-center-medium { text-align: center !important; }
+    .sb-text-left-medium { text-align: left !important; }
+
+}
+
+/* Phone landscape and smaller */
+@media (max-width: $breakpoint-small-max) {
+
+    .sb-text-center-small { text-align: center !important; }
+    .sb-text-left-small { text-align: left !important; }
+
+}
+
+
+/* Wrap modifiers
+ ========================================================================== */
+
+/*
+ * Prevent text from wrapping onto multiple lines
+ */
+
+.sb-text-nowrap { white-space: nowrap; }
+
+/*
+ * Prevent text from wrapping onto multiple lines, and truncate with an ellipsis
+ */
+
+.sb-text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*
+ * Break strings if their length exceeds the width of their container
+ */
+
+.sb-text-break {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+
+/* Transform modifiers
+ ========================================================================== */
+
+.sb-text-capitalize { text-transform: capitalize !important; }
+.sb-text-lowercase { text-transform: lowercase !important; }
+.sb-text-uppercase { text-transform: uppercase !important; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-text-misc();
+
+// @mixin hook-text-misc(){}

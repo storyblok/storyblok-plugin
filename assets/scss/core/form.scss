@@ -1,0 +1,629 @@
+// Name:            Form
+// Description:     Defines styles for forms
+//
+// Component:       `sb-form`
+//
+// Sub-objects:     `sb-form-row`
+//                  `sb-form-help-inline`
+//                  `sb-form-help-block`
+//                  `sb-form-label`
+//                  `sb-form-controls`
+//                  `sb-form-controls-condensed`
+//                  `sb-form-icon`
+//
+// Modifiers:       `sb-form-stacked`
+//                  `sb-form-horizontal`
+//
+// Sub-modifiers:   `sb-form-danger`
+//                  `sb-form-success`
+//                  `sb-form-small`
+//                  `sb-form-large`
+//                  `sb-form-blank`
+//                  `sb-form-width-mini`
+//                  `sb-form-width-small`
+//                  `sb-form-width-medium`
+//                  `sb-form-width-large`
+//                  `sb-form-controls-text`
+//
+// Markup:
+//
+// <!-- sb-form -->
+// <form class="sb-form">
+//     <div class="sb-form-row">
+//         <label class="sb-form-label" for="form-input-1"></label>
+//         <div class="sb-form-controls">
+//             <input type="text" id="form-input-1" placeholder="Text">
+//         </div>
+//     </div>
+// </form>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$form-height:                                    30px !default;
+$form-padding:                                   4px 6px !default;
+$form-border:                                    #ddd !default;
+$form-border-width:                              1px !default;
+$form-background:                                #fff !default;
+$form-color:                                     #444 !default;
+
+$form-focus-border:                              #99baca !default;
+$form-focus-background:                          #f5fbfe !default;
+$form-focus-color:                               #444 !default;
+
+$form-disabled-border:                           #ddd !default;
+$form-disabled-background:                       #f5f5f5 !default;
+$form-disabled-color:                            #999 !default;
+
+$form-placeholder-color:                         #999 !default;
+
+$form-gutter:                                    15px !default;
+
+$form-legend-border:                             #ddd !default;
+$form-legend-border-width:                       1px !default;
+$form-legend-font-size:                          18px !default;
+$form-legend-line-height:                        30px !default;
+
+$form-small-height:                              25px !default;
+$form-large-height:                              40px !default;
+$form-small-padding:                             3px 3px !default;
+$form-large-padding:                             8px 6px !default;
+$form-small-font-size:                           12px !default;
+$form-large-font-size:                           16px !default;
+
+$form-danger-border:                             #dc8d99 !default;
+$form-danger-background:                         #fff7f8 !default;
+$form-danger-color:                              #d85030 !default;
+
+$form-success-border:                            #8ec73b !default;
+$form-success-background:                        #fafff2 !default;
+$form-success-color:                             #659f13 !default;
+
+$form-blank-border:                              #ddd !default;
+$form-blank-border-style:                        dashed !default;
+
+$form-mini-width:                                40px !default;
+$form-small-width:                               130px !default;
+$form-medium-width:                              200px !default;
+$form-large-width:                               500px !default;
+
+$form-help-inline-margin-left:                   10px !default;
+$form-help-block-margin-top:                     5px !default;
+
+$form-controls-condensed-margin-vertical:        5px !default;
+
+$form-stacked-margin-bottom:                     5px !default;
+$form-stacked-font-weight:                       bold !default;
+
+$form-horizontal-label-width:                    200px !default;
+$form-horizontal-label-margin-top:               5px !default;
+$form-horizontal-controls-margin-left:           215px !default;
+$form-horizontal-controls-text-padding-top:      5px !default;
+
+$form-icon-width:                                30px !default;
+$form-icon-font-size:                            14px !default;
+$form-icon-color:                                #999 !default;
+
+
+/* ========================================================================
+   Component: Form
+ ========================================================================== */
+
+/*
+ * 1. Define consistent box sizing.
+ *    Default is `content-box` with following exceptions set to `border-box`
+ *    `button`, `select`, `input[type="checkbox"]` and `input[type="radio"]`
+ *    `input[type="search"]` in Chrome, Safari and Opera
+ *    `input[type="color"]` in Firefox
+ * 2. Address margins set differently in Firefox/IE and Chrome/Safari/Opera.
+ * 3. Remove `border-radius` in iOS.
+ * 4. Correct `font` properties and `color` not being inherited.
+ */
+
+.sb-form input,
+.sb-form select,
+.sb-form textarea {
+    /* 1 */
+    box-sizing: border-box;
+    /* 2 */
+    margin: 0;
+    /* 3 */
+    border-radius: 0;
+    /* 4 */
+    font: inherit;
+    color: inherit;
+}
+
+/*
+ * Address inconsistent `text-transform` inheritance which is only inherit in Firefox
+ */
+
+.sb-form select { text-transform: none; }
+
+/*
+ * 1. Correct `font` properties not being inherited.
+ * 2. Don't inherit the `font-weight` and use `bold` instead.
+ * NOTE: Both declarations don't work in Chrome, Safari and Opera.
+ */
+
+.sb-form optgroup {
+    /* 1 */
+    font: inherit;
+    /* 2 */
+    font-weight: bold;
+}
+
+/*
+ * Removes inner padding and border in Firefox 4+.
+ */
+
+.sb-form input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/*
+ * Removes excess padding in IE 8/9/10.
+ */
+
+.sb-form input[type="checkbox"],
+.sb-form input[type="radio"] { padding: 0; }
+
+/*
+ * Improves consistency of cursor style for clickable elements
+ */
+
+.sb-form input[type="checkbox"]:not(:disabled),
+.sb-form input[type="radio"]:not(:disabled) { cursor: pointer; }
+
+/*
+ * Remove default style in iOS.
+ */
+
+.sb-form textarea,
+.sb-form input:not([type]),
+.sb-form input[type="text"],
+.sb-form input[type="password"],
+.sb-form input[type="email"],
+.sb-form input[type="url"],
+.sb-form input[type="search"],
+.sb-form input[type="tel"],
+.sb-form input[type="number"],
+.sb-form input[type="datetime"] { -webkit-appearance: none; }
+
+/*
+ * Remove inner padding and search cancel button in Chrome, Safari and Opera on OS X.
+ */
+
+.sb-form input[type="search"]::-webkit-search-cancel-button,
+.sb-form input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+/*
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+.sb-form input[type="number"]::-webkit-inner-spin-button,
+.sb-form input[type="number"]::-webkit-outer-spin-button { height: auto; }
+
+/*
+ * Define consistent border, margin, and padding.
+ */
+
+.sb-form fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * 1. Remove default vertical scrollbar in IE 8/9/10/11.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+.sb-form textarea {
+    /* 1 */
+    overflow: auto;
+    /* 2 */
+    vertical-align: top;
+}
+
+/*
+ * Removes placeholder transparency in Firefox.
+ */
+
+.sb-form ::-moz-placeholder { opacity: 1; }
+
+/*
+ * Removes `box-shadow` for invalid controls in Firefox.
+ */
+
+.sb-form :invalid { box-shadow: none; }
+
+/*
+ * Vertical alignment
+ */
+
+.sb-form input:not([type="radio"]):not([type="checkbox"]),
+.sb-form select { vertical-align: middle; }
+
+
+/* Style
+ ========================================================================== */
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-form > :last-child { margin-bottom: 0; }
+
+/*
+ * Controls
+ * Except for `range`, `radio`, `checkbox`, `file`, `submit`, `reset`, `button` and `image`
+ * 1. Must be `height` because `min-height` is not working in OSX
+ * 2. Responsiveness: Sets a maximum width relative to the parent to scale on narrower viewports
+ * 3. Vertical `padding` needed for `select` elements in Firefox
+ * 4. Style
+ */
+
+.sb-form select,
+.sb-form textarea,
+.sb-form input:not([type]),
+.sb-form input[type="text"],
+.sb-form input[type="password"],
+.sb-form input[type="datetime"],
+.sb-form input[type="datetime-local"],
+.sb-form input[type="date"],
+.sb-form input[type="month"],
+.sb-form input[type="time"],
+.sb-form input[type="week"],
+.sb-form input[type="number"],
+.sb-form input[type="email"],
+.sb-form input[type="url"],
+.sb-form input[type="search"],
+.sb-form input[type="tel"],
+.sb-form input[type="color"] {
+    /* 1 */
+    height: $form-height;
+    /* 2 */
+    max-width: 100%;
+    /* 3 */
+    padding: $form-padding;
+    /* 4 */
+    border: $form-border-width solid $form-border;
+    background: $form-background;
+    color: $form-color;
+    -webkit-transition: all 0.2s linear;
+    -webkit-transition-property: border, background, color, box-shadow, padding;
+    transition: all 0.2s linear;
+    transition-property: border, background, color, box-shadow, padding;
+    @include hook-form();
+
+    // Focus state
+    &:focus {
+        border-color: $form-focus-border;
+        outline: 0;
+        background: $form-focus-background;
+        color: $form-focus-color;
+        @include hook-form-focus();
+    }
+
+    // Disabled state
+    &:disabled {
+        border-color: $form-disabled-border;
+        background-color: $form-disabled-background;
+        color: $form-disabled-color;
+        @include hook-form-disabled();
+    }
+}
+
+/*
+ * Placeholder
+ */
+
+.sb-form :-ms-input-placeholder { color: $form-placeholder-color !important; }
+.sb-form ::-moz-placeholder { color: $form-placeholder-color; }
+.sb-form ::-webkit-input-placeholder { color: $form-placeholder-color; }
+
+.sb-form :disabled:-ms-input-placeholder { color: $form-disabled-color !important; }
+.sb-form :disabled::-moz-placeholder { color: $form-disabled-color; }
+.sb-form :disabled::-webkit-input-placeholder { color: $form-disabled-color; }
+
+/*
+ * Legend
+ * 1. Behave like block element
+ * 2. Correct `color` not being inherited in IE 8/9/10/11.
+ * 3. Remove padding
+ * 4. `margin-bottom` is not working in Safari and Opera.
+ *    Using `padding` and :after instead to create the border
+ * 5. Style
+ */
+
+.sb-form legend {
+    /* 1 */
+    width: 100%;
+    /* 2 */
+    border: 0;
+    /* 3 */
+    padding: 0;
+    /* 4 */
+    padding-bottom: $form-gutter;
+    /* 5 */
+    font-size: $form-legend-font-size;
+    line-height: $form-legend-line-height;
+    @include hook-form-legend();
+}
+
+/*
+ * 1. Fixes IE9
+ */
+
+.sb-form legend:after {
+    content: "";
+    display: block;
+    border-bottom: $form-legend-border-width solid $form-legend-border;
+    /* 1 */
+    width: 100%;
+}
+
+
+/* Size modifiers
+ * Higher specificity needed to override defaults
+ ========================================================================== */
+
+select.sb-form-small,
+textarea.sb-form-small,
+input[type].sb-form-small,
+input:not([type]).sb-form-small {
+    height: $form-small-height;
+    padding: $form-small-padding;
+    font-size: $form-small-font-size;
+}
+
+select.sb-form-large,
+textarea.sb-form-large,
+input[type].sb-form-large,
+input:not([type]).sb-form-large  {
+    height: $form-large-height;
+    padding: $form-large-padding;
+    font-size: $form-large-font-size;
+}
+
+
+/* Reset height
+ * Must be after size modifiers
+ ========================================================================== */
+
+.sb-form textarea,
+.sb-form select[multiple],
+.sb-form select[size] { height: auto; }
+
+
+/* Validation states
+ * Using !important to keep the selector simple
+ ========================================================================== */
+
+/*
+ * Error state
+ */
+
+.sb-form-danger {
+    border-color: $form-danger-border !important;
+    background: $form-danger-background !important;
+    color: $form-danger-color !important;
+    @include hook-form-danger();
+}
+
+/*
+ * Success state
+ */
+
+.sb-form-success  {
+    border-color: $form-success-border !important;
+    background: $form-success-background !important;
+    color: $form-success-color !important;
+    @include hook-form-success();
+}
+
+
+/* Style modifiers
+ * Using !important to keep the selector simple
+ ========================================================================== */
+
+/*
+ * Blank form
+ */
+
+.sb-form-blank {
+    border-color: transparent !important;
+    border-style: $form-blank-border-style !important;
+    background: none !important;
+    @include hook-form-blank();
+}
+
+.sb-form-blank:focus {
+    border-color: $form-blank-border !important;
+    @include hook-form-blank-focus();
+}
+
+
+/* Size sub-modifiers
+ ========================================================================== */
+
+/*
+ * Fixed widths
+ * Different widths for mini sized `input` and `select` elements
+ */
+
+input.sb-form-width-mini { width: $form-mini-width; }
+select.sb-form-width-mini { width: ($form-mini-width + 25px); }
+.sb-form-width-small { width: $form-small-width; }
+.sb-form-width-medium { width: $form-medium-width; }
+.sb-form-width-large { width: $form-large-width; }
+
+
+/* Sub-objects: `sb-form-row`
+ * Groups labels and controls in rows
+ ========================================================================== */
+
+/*
+ * Micro clearfix
+ * Needed for `sb-form-horizontal` modifier
+ */
+
+.sb-form-row:before,
+.sb-form-row:after {
+    content: "";
+    display: table;
+}
+
+.sb-form-row:after { clear: both; }
+
+/*
+ * Vertical gutter
+ */
+
+.sb-form-row + .sb-form-row { margin-top: $form-gutter; }
+
+
+/* Help text
+ * Sub-object: `sb-form-help-inline`, `sb-form-help-block`
+ ========================================================================== */
+
+.sb-form-help-inline {
+    display: inline-block;
+    margin: 0 0 0 $form-help-inline-margin-left;
+}
+
+.sb-form-help-block { margin: $form-help-block-margin-top 0 0 0; }
+
+
+/* Controls content
+ * Sub-object: `sb-form-controls`, `sb-form-controls-condensed`
+ ========================================================================== */
+
+/*
+ * Remove margins
+ */
+
+.sb-form-controls > :first-child { margin-top: 0; }
+.sb-form-controls > :last-child { margin-bottom: 0; }
+
+/*
+ * Group controls and text into blocks with a small spacing between blocks
+ */
+
+.sb-form-controls-condensed { margin: $form-controls-condensed-margin-vertical 0; }
+
+
+/* Modifier: `sb-form-stacked`
+ * Requires sub-object: `sb-form-label`
+ ========================================================================== */
+
+.sb-form-stacked .sb-form-label {
+    display: block;
+    margin-bottom: $form-stacked-margin-bottom;
+    font-weight: $form-stacked-font-weight;
+    @include hook-form-stacked-label();
+}
+
+
+/* Modifier: `sb-form-horizontal`
+ * Requires sub-objects: `sb-form-label`, `sb-form-controls`
+ ========================================================================== */
+
+/* Tablet portrait and smaller */
+@media (max-width: $breakpoint-medium-max) {
+
+    /* Behave like `sb-form-stacked` */
+    .sb-form-horizontal .sb-form-label {
+        display: block;
+        margin-bottom: $form-stacked-margin-bottom;
+        font-weight: $form-stacked-font-weight;
+        @include hook-form-stacked-label();
+    }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .sb-form-horizontal .sb-form-label {
+        width: $form-horizontal-label-width;
+        margin-top: $form-horizontal-label-margin-top;
+        float: left;
+        @include hook-form-horizontal-label();
+    }
+
+    .sb-form-horizontal .sb-form-controls { margin-left: $form-horizontal-controls-margin-left; }
+
+    /* Better vertical alignment if controls are checkboxes and radio buttons with text */
+    .sb-form-horizontal .sb-form-controls-text { padding-top: $form-horizontal-controls-text-padding-top; }
+
+}
+
+
+/* Sub-object: `sb-form-icon`
+ ========================================================================== */
+
+/*
+ * 1. Container width fits its content
+ * 2. Create position context
+ * 3. Prevent `inline-block` consequences
+ */
+
+.sb-form-icon {
+    /* 1 */
+    display: inline-block;
+    /* 2 */
+    position: relative;
+    /* 3 */
+    max-width: 100%;
+}
+
+/*
+ * 1. Make form element clickable through icon
+ */
+
+.sb-form-icon > [class*='sb-icon-'] {
+    position: absolute;
+    top: 50%;
+    width: $form-icon-width;
+    margin-top: round($form-icon-font-size / -2);
+    font-size: $form-icon-font-size;
+    color: $form-icon-color;
+    text-align: center;
+    /* 1 */
+    pointer-events: none;
+}
+
+.sb-form-icon:not(.sb-form-icon-flip) > input { padding-left: $form-icon-width !important; }
+
+/*
+ * Sub-modifier: `sb-form-icon-flip`
+ */
+
+.sb-form-icon-flip > [class*='sb-icon-'] { right: 0; }
+.sb-form-icon-flip > input { padding-right: $form-icon-width !important; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-form-misc();
+
+// @mixin hook-form(){}
+// @mixin hook-form-focus(){}
+// @mixin hook-form-disabled(){}
+// @mixin hook-form-legend(){}
+// @mixin hook-form-danger(){}
+// @mixin hook-form-success(){}
+// @mixin hook-form-blank(){}
+// @mixin hook-form-blank-focus(){}
+// @mixin hook-form-stacked-label(){}
+// @mixin hook-form-horizontal-label(){}
+// @mixin hook-form-misc(){}

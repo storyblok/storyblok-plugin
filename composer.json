@@ -1,0 +1,15 @@
+{
+    "name": "storyblok/storyblok-plugin",
+    "description": "Storyblok plugin comes with ready to use components",
+    "type": "library",
+    "keywords": ["storyblok"],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "authors": [
+        {
+            "name": "Alexander Feiglstorfer",
+            "email": "delooks@gmail.com"
+        }
+    ]
+}

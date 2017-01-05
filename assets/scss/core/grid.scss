@@ -1,0 +1,731 @@
+// Name:            Grid
+// Description:     Provides a responsive, fluid and nestable grid
+//
+// Component:       `sb-grid`
+//                  `sb-width-*`
+//                  `sb-push-*`
+//                  `sb-pull-*`
+//
+// Modifiers:       `sb-grid-collapse`
+//                  `sb-grid-small`
+//                  `sb-grid-medium`
+//                  `sb-grid-large`
+//                  `sb-grid-divider`
+//                  `sb-grid-margin`
+//                  `sb-grid-match`
+//                  `sb-grid-width-*`
+//
+// Uses:            Panel: `sb-panel`
+//
+// Used by:         Dropdown
+//
+// Markup:
+//
+// <!-- sb-grid -->
+// <div class="sb-grid">
+//     <div class="sb-width-1-2"></div>
+//     <div class="sb-width-1-2"></div>
+// </div>
+//
+// <!-- sb-grid-divider -->
+// <div class="sb-grid sb-grid-divider">
+//     <div class="sb-width-1-2"></div>
+//     <div class="sb-width-1-2"></div>
+// </div>
+// <hr class="sb-grid-divider">
+// <div class="sb-grid sb-grid-divider">
+//     <div class="sb-width-1-2"></div>
+//     <div class="sb-width-1-2"></div>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$grid-gutter-horizontal:                         25px !default;
+$grid-gutter-vertical:                           25px !default;
+
+$grid-gutter-large-horizontal:                   35px !default;
+$grid-gutter-large-vertical:                     35px !default;
+
+$grid-gutter-xlarge-horizontal:                  50px !default;
+$grid-gutter-xlarge-vertical:                    50px !default;
+
+$grid-gutter-small-horizontal:                   10px !default;
+$grid-gutter-small-vertical:                     10px !default;
+
+$grid-divider-border:                            #ddd !default;
+$grid-divider-border-width:                      1px !default;
+
+
+/* ========================================================================
+   Component: Grid
+ ========================================================================== */
+
+/*
+ * 1. Makes grid more robust so that it can be used with other block elements like lists
+ */
+
+.sb-grid {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* 1 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * DEPRECATED
+ * Micro clearfix
+ * Can't use `table` because it creates a 1px gap when it becomes a flex item, only in Webkit
+ */
+
+.sb-grid:before,
+.sb-grid:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+}
+
+.sb-grid:after { clear: both; }
+
+/*
+ * Grid cell
+ * 1. Space is allocated solely based on content dimensions
+ * 2. Makes grid more robust so that it can be used with other block elements
+ * 3. DEPRECATED Using `float` to support IE9
+ */
+
+.sb-grid > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    /* 2 */
+    margin: 0;
+    /* 3 */
+    float: left;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-grid > * > :last-child { margin-bottom: 0; }
+
+
+/* Grid gutter
+ ========================================================================== */
+
+/*
+ * Default gutter
+ */
+
+/* Horizontal */
+.sb-grid { margin-left: -$grid-gutter-horizontal; }
+.sb-grid > * { padding-left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.sb-grid + .sb-grid,
+.sb-grid-margin,
+.sb-grid > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-vertical; }
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    /* Horizontal */
+    .sb-grid { margin-left: -$grid-gutter-large-horizontal; }
+    .sb-grid > * { padding-left: $grid-gutter-large-horizontal; }
+
+    /* Vertical */
+    .sb-grid + .sb-grid,
+    .sb-grid-margin,
+    .sb-grid > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-large-vertical; }
+
+}
+
+/*
+ * Collapse gutter
+ */
+
+/* Horizontal */
+.sb-grid-collapse { margin-left: 0; }
+.sb-grid-collapse > * { padding-left: 0; }
+
+/* Vertical */
+.sb-grid-collapse + .sb-grid-collapse,
+.sb-grid-collapse > .sb-grid-margin,
+.sb-grid-collapse > * > .sb-panel + .sb-panel { margin-top: 0; }
+
+/*
+ * Small gutter
+ */
+
+/* Horizontal */
+.sb-grid-small { margin-left: -$grid-gutter-small-horizontal; }
+.sb-grid-small > * { padding-left: $grid-gutter-small-horizontal; }
+
+/* Vertical */
+.sb-grid-small + .sb-grid-small,
+.sb-grid-small > .sb-grid-margin,
+.sb-grid-small > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-small-vertical; }
+
+/*
+ * Medium gutter
+ */
+
+/* Horizontal */
+.sb-grid-medium { margin-left: -$grid-gutter-horizontal; }
+.sb-grid-medium > * { padding-left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.sb-grid-medium + .sb-grid-medium,
+.sb-grid-medium > .sb-grid-margin,
+.sb-grid-medium > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-vertical; }
+
+
+/*
+ * Large gutter
+ */
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Horizontal */
+    .sb-grid-large { margin-left: -$grid-gutter-large-horizontal; }
+    .sb-grid-large > * { padding-left: $grid-gutter-large-horizontal; }
+
+    /* Vertical */
+    .sb-grid-large + .sb-grid-large,
+    .sb-grid-large-margin,
+    .sb-grid-large > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-large-vertical; }
+
+}
+
+/* Extra Large screens */
+@media (min-width: $breakpoint-xlarge) {
+
+    /* Horizontal */
+    .sb-grid-large { margin-left: -$grid-gutter-xlarge-horizontal; }
+    .sb-grid-large > * { padding-left: $grid-gutter-xlarge-horizontal; }
+
+    /* Vertical */
+    .sb-grid-large + .sb-grid-large,
+    .sb-grid-large-margin,
+    .sb-grid-large > * > .sb-panel + .sb-panel { margin-top: $grid-gutter-xlarge-vertical; }
+
+}
+
+
+/* Modifier: `sb-grid-divider`
+ ========================================================================== */
+
+/*
+ * Horizontal divider
+ * Only works with the default gutter. Does not work with gutter collapse, small or large.
+ * Does not work with `sb-push-*`, `sb-pull-*` and not if the columns float into the next row.
+ */
+
+.sb-grid-divider:not(:empty) {
+    margin-left: -$grid-gutter-horizontal;
+    margin-right: -$grid-gutter-horizontal;
+}
+
+.sb-grid-divider > * {
+    padding-left: $grid-gutter-horizontal;
+    padding-right: $grid-gutter-horizontal;
+}
+
+.sb-grid-divider > [class*='sb-width-1-']:not(.sb-width-1-1):nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-2-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-3-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-4-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-5-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-6-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-7-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-8-']:nth-child(n+2),
+.sb-grid-divider > [class*='sb-width-9-']:nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .sb-grid-divider > [class*='sb-width-medium-']:not(.sb-width-medium-1-1):nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .sb-grid-divider > [class*='sb-width-large-']:not(.sb-width-large-1-1):nth-child(n+2) { border-left: $grid-divider-border-width solid $grid-divider-border; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    /*
+     * Large gutter
+     */
+
+    .sb-grid-divider:not(:empty) {
+        margin-left: -$grid-gutter-large-horizontal;
+        margin-right: -$grid-gutter-large-horizontal;
+    }
+
+    .sb-grid-divider > * {
+        padding-left: $grid-gutter-large-horizontal;
+        padding-right: $grid-gutter-large-horizontal;
+    }
+
+    .sb-grid-divider:empty {
+        margin-top: $grid-gutter-large-vertical;
+        margin-bottom: $grid-gutter-large-vertical;
+    }
+
+}
+
+/*
+ * Vertical divider
+ */
+
+.sb-grid-divider:empty {
+    margin-top: $grid-gutter-vertical;
+    margin-bottom: $grid-gutter-vertical;
+    border-top: $grid-divider-border-width solid $grid-divider-border;
+}
+
+/* Match panels in grids
+ ========================================================================== */
+
+/*
+ * 1. Behave like a block element
+ */
+
+.sb-grid-match > * {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* 1 */
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.sb-grid-match > * > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+/* Even grid cell widths
+ ========================================================================== */
+
+[class*='sb-grid-width'] > * {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.sb-grid-width-1-2 > * { width: 50%; }
+.sb-grid-width-1-3 > * { width: 33.333%; }
+.sb-grid-width-1-4 > * { width: 25%; }
+.sb-grid-width-1-5 > * { width: 20%; }
+.sb-grid-width-1-6 > * { width: 16.666%; }
+.sb-grid-width-1-10 > * { width: 10%; }
+
+.sb-grid-width-auto > * { width: auto; }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .sb-grid-width-small-1-1 > * { width: 100%; }
+    .sb-grid-width-small-1-2 > * { width: 50%; }
+    .sb-grid-width-small-1-3 > * { width: 33.333%; }
+    .sb-grid-width-small-1-4 > * { width: 25%; }
+    .sb-grid-width-small-1-5 > * { width: 20%; }
+    .sb-grid-width-small-1-6 > * { width: 16.666%; }
+    .sb-grid-width-small-1-10 > * { width: 10%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .sb-grid-width-medium-1-1 > * { width: 100%; }
+    .sb-grid-width-medium-1-2 > * { width: 50%; }
+    .sb-grid-width-medium-1-3 > * { width: 33.333%; }
+    .sb-grid-width-medium-1-4 > * { width: 25%; }
+    .sb-grid-width-medium-1-5 > * { width: 20%; }
+    .sb-grid-width-medium-1-6 > * { width: 16.666%; }
+    .sb-grid-width-medium-1-10 > * { width: 10%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .sb-grid-width-large-1-1 > * { width: 100%; }
+    .sb-grid-width-large-1-2 > * { width: 50%; }
+    .sb-grid-width-large-1-3 > * { width: 33.333%; }
+    .sb-grid-width-large-1-4 > * { width: 25%; }
+    .sb-grid-width-large-1-5 > * { width: 20%; }
+    .sb-grid-width-large-1-6 > * { width: 16.666%; }
+    .sb-grid-width-large-1-10 > * { width: 10%; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    .sb-grid-width-xlarge-1-1 > * { width: 100%; }
+    .sb-grid-width-xlarge-1-2 > * { width: 50%; }
+    .sb-grid-width-xlarge-1-3 > * { width: 33.333%; }
+    .sb-grid-width-xlarge-1-4 > * { width: 25%; }
+    .sb-grid-width-xlarge-1-5 > * { width: 20%; }
+    .sb-grid-width-xlarge-1-6 > * { width: 16.666%; }
+    .sb-grid-width-xlarge-1-10 > * { width: 10%; }
+
+}
+
+
+/* Sub-objects: `sb-width-*`
+ ========================================================================== */
+
+[class*='sb-width'] {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/*
+ * Widths
+ */
+
+/* Whole */
+.sb-width-1-1 { width: 100%; }
+
+/* Halves */
+.sb-width-1-2,
+.sb-width-2-4,
+.sb-width-3-6,
+.sb-width-5-10 { width: 50%; }
+
+/* Thirds */
+.sb-width-1-3,
+.sb-width-2-6 { width: 33.333%; }
+.sb-width-2-3,
+.sb-width-4-6 { width: 66.666%; }
+
+/* Quarters */
+.sb-width-1-4 { width: 25%; }
+.sb-width-3-4 { width: 75%; }
+
+/* Fifths */
+.sb-width-1-5,
+.sb-width-2-10 { width: 20%; }
+.sb-width-2-5,
+.sb-width-4-10 { width: 40%; }
+.sb-width-3-5,
+.sb-width-6-10 { width: 60%; }
+.sb-width-4-5,
+.sb-width-8-10 { width: 80%; }
+
+/* Sixths */
+.sb-width-1-6 { width: 16.666%; }
+.sb-width-5-6 { width: 83.333%; }
+
+/* Tenths */
+.sb-width-1-10 { width: 10%; }
+.sb-width-3-10 { width: 30%; }
+.sb-width-7-10 { width: 70%; }
+.sb-width-9-10 { width: 90%; }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    /* Whole */
+    .sb-width-small-1-1 { width: 100%; }
+
+    /* Halves */
+    .sb-width-small-1-2,
+    .sb-width-small-2-4,
+    .sb-width-small-3-6,
+    .sb-width-small-5-10 { width: 50%; }
+
+    /* Thirds */
+    .sb-width-small-1-3,
+    .sb-width-small-2-6 { width: 33.333%; }
+    .sb-width-small-2-3,
+    .sb-width-small-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .sb-width-small-1-4 { width: 25%; }
+    .sb-width-small-3-4 { width: 75%; }
+
+    /* Fifths */
+    .sb-width-small-1-5,
+    .sb-width-small-2-10 { width: 20%; }
+    .sb-width-small-2-5,
+    .sb-width-small-4-10 { width: 40%; }
+    .sb-width-small-3-5,
+    .sb-width-small-6-10 { width: 60%; }
+    .sb-width-small-4-5,
+    .sb-width-small-8-10 { width: 80%; }
+
+    /* Sixths */
+    .sb-width-small-1-6 { width: 16.666%; }
+    .sb-width-small-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .sb-width-small-1-10 { width: 10%; }
+    .sb-width-small-3-10 { width: 30%; }
+    .sb-width-small-7-10 { width: 70%; }
+    .sb-width-small-9-10 { width: 90%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    /* Whole */
+    .sb-width-medium-1-1 { width: 100%; }
+
+    /* Halves */
+    .sb-width-medium-1-2,
+    .sb-width-medium-2-4,
+    .sb-width-medium-3-6,
+    .sb-width-medium-5-10 { width: 50%; }
+
+    /* Thirds */
+    .sb-width-medium-1-3,
+    .sb-width-medium-2-6 { width: 33.333%; }
+    .sb-width-medium-2-3,
+    .sb-width-medium-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .sb-width-medium-1-4 { width: 25%; }
+    .sb-width-medium-3-4 { width: 75%; }
+
+    /* Fifths */
+    .sb-width-medium-1-5,
+    .sb-width-medium-2-10 { width: 20%; }
+    .sb-width-medium-2-5,
+    .sb-width-medium-4-10 { width: 40%; }
+    .sb-width-medium-3-5,
+    .sb-width-medium-6-10 { width: 60%; }
+    .sb-width-medium-4-5,
+    .sb-width-medium-8-10 { width: 80%; }
+
+    /* Sixths */
+    .sb-width-medium-1-6 { width: 16.666%; }
+    .sb-width-medium-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .sb-width-medium-1-10 { width: 10%; }
+    .sb-width-medium-3-10 { width: 30%; }
+    .sb-width-medium-7-10 { width: 70%; }
+    .sb-width-medium-9-10 { width: 90%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Whole */
+    .sb-width-large-1-1 { width: 100%; }
+
+    /* Halves */
+    .sb-width-large-1-2,
+    .sb-width-large-2-4,
+    .sb-width-large-3-6,
+    .sb-width-large-5-10 { width: 50%; }
+
+    /* Thirds */
+    .sb-width-large-1-3,
+    .sb-width-large-2-6 { width: 33.333%; }
+    .sb-width-large-2-3,
+    .sb-width-large-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .sb-width-large-1-4 { width: 25%; }
+    .sb-width-large-3-4 { width: 75%; }
+
+    /* Fifths */
+    .sb-width-large-1-5,
+    .sb-width-large-2-10 { width: 20%; }
+    .sb-width-large-2-5,
+    .sb-width-large-4-10 { width: 40%; }
+    .sb-width-large-3-5,
+    .sb-width-large-6-10 { width: 60%; }
+    .sb-width-large-4-5,
+    .sb-width-large-8-10 { width: 80%; }
+
+    /* Sixths */
+    .sb-width-large-1-6 { width: 16.666%; }
+    .sb-width-large-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .sb-width-large-1-10 { width: 10%; }
+    .sb-width-large-3-10 { width: 30%; }
+    .sb-width-large-7-10 { width: 70%; }
+    .sb-width-large-9-10 { width: 90%; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    /* Whole */
+    .sb-width-xlarge-1-1 { width: 100%; }
+
+    /* Halves */
+    .sb-width-xlarge-1-2,
+    .sb-width-xlarge-2-4,
+    .sb-width-xlarge-3-6,
+    .sb-width-xlarge-5-10 { width: 50%; }
+
+    /* Thirds */
+    .sb-width-xlarge-1-3,
+    .sb-width-xlarge-2-6 { width: 33.333%; }
+    .sb-width-xlarge-2-3,
+    .sb-width-xlarge-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .sb-width-xlarge-1-4 { width: 25%; }
+    .sb-width-xlarge-3-4 { width: 75%; }
+
+    /* Fifths */
+    .sb-width-xlarge-1-5,
+    .sb-width-xlarge-2-10 { width: 20%; }
+    .sb-width-xlarge-2-5,
+    .sb-width-xlarge-4-10 { width: 40%; }
+    .sb-width-xlarge-3-5,
+    .sb-width-xlarge-6-10 { width: 60%; }
+    .sb-width-xlarge-4-5,
+    .sb-width-xlarge-8-10 { width: 80%; }
+
+    /* Sixths */
+    .sb-width-xlarge-1-6 { width: 16.666%; }
+    .sb-width-xlarge-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .sb-width-xlarge-1-10 { width: 10%; }
+    .sb-width-xlarge-3-10 { width: 30%; }
+    .sb-width-xlarge-7-10 { width: 70%; }
+    .sb-width-xlarge-9-10 { width: 90%; }
+
+}
+
+
+/* Sub-object: `sb-push-*` and `sb-pull-*`
+ ========================================================================== */
+
+/*
+ * Source ordering
+ * Works only with `sb-width-medium-*`
+ */
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    [class*='sb-push-'],
+    [class*='sb-pull-'] { position: relative; }
+
+    /*
+     * Push
+     */
+
+    /* Halves */
+    .sb-push-1-2,
+    .sb-push-2-4,
+    .sb-push-3-6,
+    .sb-push-5-10 { left: 50%; }
+
+    /* Thirds */
+    .sb-push-1-3,
+    .sb-push-2-6 { left: 33.333%; }
+    .sb-push-2-3,
+    .sb-push-4-6 { left: 66.666%; }
+
+    /* Quarters */
+    .sb-push-1-4 { left: 25%; }
+    .sb-push-3-4 { left: 75%; }
+
+    /* Fifths */
+    .sb-push-1-5,
+    .sb-push-2-10 { left: 20%; }
+    .sb-push-2-5,
+    .sb-push-4-10 { left: 40%; }
+    .sb-push-3-5,
+    .sb-push-6-10 { left: 60%; }
+    .sb-push-4-5,
+    .sb-push-8-10 { left: 80%; }
+
+    /* Sixths */
+    .sb-push-1-6 { left: 16.666%; }
+    .sb-push-5-6 { left: 83.333%; }
+
+    /* Tenths */
+    .sb-push-1-10 { left: 10%; }
+    .sb-push-3-10 { left: 30%; }
+    .sb-push-7-10 { left: 70%; }
+    .sb-push-9-10 { left: 90%; }
+
+    /*
+     * Pull
+     */
+
+     /* Halves */
+     .sb-pull-1-2,
+     .sb-pull-2-4,
+     .sb-pull-3-6,
+     .sb-pull-5-10 { left: -50%; }
+
+     /* Thirds */
+     .sb-pull-1-3,
+     .sb-pull-2-6 { left: -33.333%; }
+     .sb-pull-2-3,
+     .sb-pull-4-6 { left: -66.666%; }
+
+     /* Quarters */
+     .sb-pull-1-4 { left: -25%; }
+     .sb-pull-3-4 { left: -75%; }
+
+     /* Fifths */
+     .sb-pull-1-5,
+     .sb-pull-2-10 { left: -20%; }
+     .sb-pull-2-5,
+     .sb-pull-4-10 { left: -40%; }
+     .sb-pull-3-5,
+     .sb-pull-6-10 { left: -60%; }
+     .sb-pull-4-5,
+     .sb-pull-8-10 { left: -80%; }
+
+     /* Sixths */
+     .sb-pull-1-6 { left: -16.666%; }
+     .sb-pull-5-6 { left: -83.333%; }
+
+     /* Tenths */
+     .sb-pull-1-10 { left: -10%; }
+     .sb-pull-3-10 { left: -30%; }
+     .sb-pull-7-10 { left: -70%; }
+     .sb-pull-9-10 { left: -90%; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-grid-misc();
+
+// @mixin hook-grid-misc(){}

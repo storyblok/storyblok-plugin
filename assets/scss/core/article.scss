@@ -1,0 +1,139 @@
+// Name:            Article
+// Description:     Defines styles for articles within your page
+//
+// Component:       `sb-article`
+//
+// Sub-objects:     `sb-article-title`
+//                  `sb-article-meta`
+//                  `sb-article-lead`
+//                  `sb-article-divider`
+//
+// Markup:
+//
+// <!-- sb-article -->
+// <div class="sb-article">
+//     <h1 class="sb-article-title"></h1>
+//     <p class="sb-article-meta"></p>
+//     <p class="sb-article-lead"></p>
+//     <p></p>
+//     <hr class="sb-article-divider">
+//     <p></p>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$article-margin-top:                             25px !default;
+
+$article-title-font-size:                        36px !default;
+$article-title-line-height:                      42px !default;
+$article-title-font-weight:                      normal !default;
+$article-title-text-transform:                   none !default;
+
+$article-meta-font-size:                         12px !default;
+$article-meta-line-height:                       18px !default;
+$article-meta-color:                             #999 !default;
+
+$article-lead-color:                             #444 !default;
+$article-lead-font-size:                         18px !default;
+$article-lead-line-height:                       24px !default;
+$article-lead-font-weight:                       normal !default;
+
+$article-divider-margin:                         25px !default;
+$article-divider-border:                         #ddd !default;
+
+
+/* ========================================================================
+   Component: Article
+ ========================================================================== */
+
+/*
+ * Micro clearfix to make articles more robust
+ */
+
+.sb-article:before,
+.sb-article:after {
+    content: "";
+    display: table;
+}
+
+.sb-article:after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-article > :last-child { margin-bottom: 0; }
+
+/*
+ * Vertical gutter for articles
+ */
+
+.sb-article + .sb-article { margin-top: $article-margin-top; }
+
+
+/* Sub-object `sb-article-title`
+ ========================================================================== */
+
+.sb-article-title {
+    font-size: $article-title-font-size;
+    line-height: $article-title-line-height;
+    font-weight: $article-title-font-weight;
+    text-transform: $article-title-text-transform;
+    @include hook-article-title();
+}
+
+.sb-article-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Sub-object `sb-article-meta`
+ ========================================================================== */
+
+.sb-article-meta {
+    font-size: $article-meta-font-size;
+    line-height: $article-meta-line-height;
+    color: $article-meta-color;
+    @include hook-article-meta();
+}
+
+
+/* Sub-object `sb-article-lead`
+ ========================================================================== */
+
+.sb-article-lead {
+    color: $article-lead-color;
+    font-size: $article-lead-font-size;
+    line-height: $article-lead-line-height;
+    font-weight: $article-lead-font-weight;
+    @include hook-article-lead();
+}
+
+
+/* Sub-object `sb-article-divider`
+ ========================================================================== */
+
+.sb-article-divider {
+    margin-bottom: $article-divider-margin;
+    border-color: $article-divider-border;
+    @include hook-article-divider();
+}
+
+* + .sb-article-divider { margin-top: $article-divider-margin; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-article-misc();
+
+// @mixin hook-article-title(){}
+// @mixin hook-article-meta(){}
+// @mixin hook-article-lead(){}
+// @mixin hook-article-divider(){}
+// @mixin hook-article-misc(){}

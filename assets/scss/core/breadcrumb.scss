@@ -1,0 +1,86 @@
+// Name:            Breadcrumb
+// Description:     Defines styles for a breadcrumb navigation
+//
+// Component:       `sb-breadcrumb`
+//
+// States:          `sb-active`
+//
+// Markup:
+//
+// <!-- sb-breadcrumb -->
+// <ul class="sb-breadcrumb">
+//     <li><a href=""></a></li>
+//     <li><span></span></li>
+//     <li class="sb-active"><span></span></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$breadcrumb-font-size:                           1rem !default;
+
+$breadcrumb-divider:                             "/" !default;
+$breadcrumb-divider-margin:                      8px !default;
+$breadcrumb-disabled-color:                      #999 !default;
+
+
+/* ========================================================================
+   Component: Breadcrumb
+ ========================================================================== */
+
+/*
+ * 1. Remove default list style
+ * 2. Remove whitespace between child elements when using `inline-block`
+ */
+
+.sb-breadcrumb {
+    /* 1 */
+    padding: 0;
+    list-style: none;
+    /* 2 */
+    font-size: 0.001px;
+    @include hook-breadcrumb();
+}
+
+
+/* Items
+ ========================================================================== */
+
+/*
+ * Reset whitespace hack
+ */
+
+.sb-breadcrumb > li {
+    font-size: $breadcrumb-font-size;
+    vertical-align: top;
+}
+
+.sb-breadcrumb > li,
+.sb-breadcrumb > li > a,
+.sb-breadcrumb > li > span { display: inline-block; }
+
+.sb-breadcrumb > li:nth-child(n+2):before {
+    content: $breadcrumb-divider;
+    display: inline-block;
+    margin: 0 $breadcrumb-divider-margin;
+    @include hook-breadcrumb-divider();
+}
+
+/*
+ * Disabled
+ */
+
+.sb-breadcrumb > li:not(.sb-active) > span { color: $breadcrumb-disabled-color; }
+
+
+// Hooks
+// ========================================================================
+
+@include hook-breadcrumb-misc();
+
+// @mixin hook-breadcrumb(){}
+// @mixin hook-breadcrumb-divider(){}
+// @mixin hook-breadcrumb-misc(){}

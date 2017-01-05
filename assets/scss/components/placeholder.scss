@@ -1,0 +1,66 @@
+// Name:            Placeholder
+// Description:     Defines styles for placeholder boxes
+//
+// Component:       `sb-placeholder`
+//
+// Modifiers:       `sb-placeholder-large`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$placeholder-margin-vertical:                    15px !default;
+$placeholder-padding:                            20px !default;
+$placeholder-border:                             #ddd !default;
+$placeholder-background:                         #fafafa !default;
+$placeholder-color:                              #444 !default;
+
+$placeholder-large-padding-vertical:             80px !default;
+
+
+/* ========================================================================
+   Component: Placeholder
+ ========================================================================== */
+
+.sb-placeholder {
+    margin-bottom: $placeholder-margin-vertical;
+    padding: $placeholder-padding;
+    border: 1px dashed $placeholder-border;
+    background: $placeholder-background;
+    color: $placeholder-color;
+    @include hook-placeholder();
+}
+
+/*
+ * Add margin if adjacent element
+ */
+
+* + .sb-placeholder { margin-top: $placeholder-margin-vertical; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.sb-placeholder > :last-child { margin-bottom: 0; }
+
+
+/* Modifier: `sb-placeholder-large`
+ ========================================================================== */
+
+.sb-placeholder-large {
+    padding-top: $placeholder-large-padding-vertical;
+    padding-bottom: $placeholder-large-padding-vertical;
+    @include hook-placeholder-large();
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-placeholder-misc();
+
+// @mixin hook-placeholder(){}
+// @mixin hook-placeholder-large(){}
+// @mixin hook-placeholder-misc(){}

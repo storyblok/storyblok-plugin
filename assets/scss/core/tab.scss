@@ -1,0 +1,368 @@
+// Name:            Tab
+// Description:     Defines styles for a tabbed navigation
+//
+// Component:       `sb-tab`
+//
+// Modifiers:       `sb-tab-flip`
+//                  `sb-tab-center`
+//                  `sb-tab-grid`
+//                  `sb-tab-bottom`
+//                  `sb-tab-left`
+//                  `sb-tab-right`
+//                  `sb-tab-responsive`
+//
+// States:          `sb-active`
+//                  `sb-disabled`
+//
+// Markup:
+//
+// <!-- sb-tab -->
+// <ul class="sb-tab" data-sb-tab>
+//     <li class="sb-active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$tab-border:                                     #ddd !default;
+$tab-border-width:                               1px !default;
+$tab-padding-horizontal:                         12px !default;
+$tab-padding-vertical:                           8px !default;
+$tab-padding-top:                                $tab-padding-vertical !default;
+$tab-padding-bottom:                             $tab-padding-vertical !default;
+$tab-margin-horizontal:                          5px !default;
+$tab-margin-vertical:                            5px !default;
+$tab-color:                                      #07D !default;
+$tab-hover-border:                               #f5f5f5 !default;
+$tab-hover-background:                           #f5f5f5 !default;
+$tab-hover-color:                                #059 !default;
+$tab-active-border:                              #ddd !default;
+$tab-active-background:                          #fff !default;
+$tab-active-color:                               #444 !default;
+$tab-disabled-color:                             #999 !default;
+
+
+/* ========================================================================
+   Component: Tab
+ ========================================================================== */
+
+.sb-tab {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: $tab-border-width solid $tab-border;
+}
+
+/*
+ * Micro clearfix on the deepest container
+ */
+
+.sb-tab:before,
+.sb-tab:after {
+    content: "";
+    display: table;
+}
+
+.sb-tab:after { clear: both; }
+
+/*
+ * Items
+ * 1. Create position context for dropdowns
+ */
+
+.sb-tab > li {
+    margin-bottom: -$tab-border-width;
+    float: left;
+    /* 1 */
+    position: relative;
+}
+
+.sb-tab > li > a {
+    display: block;
+    padding: $tab-padding-top $tab-padding-horizontal $tab-padding-bottom $tab-padding-horizontal;
+    border: $tab-border-width solid transparent;
+    border-bottom-width: 0;
+    color: $tab-color;
+    text-decoration: none;
+    @include hook-tab();
+}
+
+.sb-tab > li:nth-child(n+2) > a { margin-left: $tab-margin-horizontal; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Also apply if dropdown is opened
+ * 3. Remove default focus style
+ */
+
+.sb-tab > li > a:hover,
+.sb-tab > li > a:focus, // 1
+.sb-tab > li.sb-open > a { // 2
+    border-color: $tab-hover-border;
+    background: $tab-hover-background;
+    color: $tab-hover-color;
+    /* 2 */
+    outline: none;
+    @include hook-tab-hover();
+}
+
+.sb-tab > li:not(.sb-active) > a:hover,
+.sb-tab > li:not(.sb-active) > a:focus,
+.sb-tab > li.sb-open:not(.sb-active) > a {
+    margin-bottom: $tab-border-width;
+    padding-bottom: $tab-padding-bottom - $tab-border-width;
+}
+
+/* Active */
+.sb-tab > li.sb-active > a {
+    border-color: $tab-active-border;
+    border-bottom-color: transparent;
+    background: $tab-active-background;
+    color: $tab-active-color;
+    @include hook-tab-active();
+}
+
+/* Disabled */
+.sb-tab > li.sb-disabled > a {
+    color: $tab-disabled-color;
+    cursor: text;
+    @include hook-tab-disabled();
+}
+
+.sb-tab > li.sb-disabled > a:hover,
+.sb-tab > li.sb-disabled > a:focus,
+.sb-tab > li.sb-disabled.sb-active > a {
+    background: none;
+    border-color: transparent;
+}
+
+
+/* Modifier: 'tab-flip'
+ ========================================================================== */
+
+.sb-tab-flip > li { float: right; }
+
+.sb-tab-flip > li:nth-child(n+2) > a {
+    margin-left: 0;
+    margin-right: $tab-margin-horizontal;
+}
+
+
+/* Modifier: 'tab-responsive'
+ ========================================================================== */
+
+.sb-tab > li.sb-tab-responsive > a {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/*
+ * Icon
+ */
+
+.sb-tab-responsive > a:before {
+    content: "\f0c9\00a0";
+    font-family: FontAwesome;
+}
+
+
+/* Modifier: 'tab-center'
+ ========================================================================== */
+
+.sb-tab-center { border-bottom: $tab-border-width solid $tab-border; }
+
+.sb-tab-center-bottom {
+    border-bottom: none;
+    border-top: $tab-border-width solid $tab-border;
+}
+
+.sb-tab-center:before,
+.sb-tab-center:after {
+    content: "";
+    display: table;
+}
+
+.sb-tab-center:after { clear: both; }
+
+
+/*
+ * 1. Using `right` to prevent vertical scrollbar caused by centering if to many tabs
+ */
+
+.sb-tab-center .sb-tab {
+    position: relative;
+    right: 50%;
+    border: none;
+    float: right;
+}
+
+.sb-tab-center .sb-tab > li {
+    position: relative;
+    right: -50%;
+}
+
+.sb-tab-center .sb-tab > li > a { text-align: center; }
+
+
+/* Modifier: 'tab-bottom'
+ ========================================================================== */
+
+.sb-tab-bottom {
+    border-top: $tab-border-width solid $tab-border;
+    border-bottom: none;
+}
+
+.sb-tab-bottom > li {
+    margin-top: -$tab-border-width;
+    margin-bottom: 0;
+}
+
+.sb-tab-bottom > li > a {
+    padding-top: $tab-padding-bottom;
+    padding-bottom: $tab-padding-top;
+    border-bottom-width: $tab-border-width;
+    border-top-width: 0;
+}
+
+.sb-tab-bottom > li:not(.sb-active) > a:hover,
+.sb-tab-bottom > li:not(.sb-active) > a:focus,
+.sb-tab-bottom > li.sb-open:not(.sb-active) > a {
+    margin-bottom: 0;
+    margin-top: $tab-border-width;
+    padding-bottom: $tab-padding-top;
+    padding-top: $tab-padding-bottom - $tab-border-width;
+}
+
+.sb-tab-bottom > li.sb-active > a {
+    border-top-color: transparent;
+    border-bottom-color: $tab-active-border;
+}
+
+
+/* Modifier: 'tab-grid'
+ ========================================================================== */
+
+/*
+ * 1. Create position context to prevent hidden border because of negative `z-index`
+ */
+
+.sb-tab-grid {
+    margin-left: -$tab-margin-horizontal;
+    border-bottom: none;
+    /* 1 */
+    position: relative;
+    z-index: 0;
+}
+
+.sb-tab-grid:before {
+    display: block;
+    position: absolute;
+    left: $tab-margin-horizontal;
+    right: 0;
+    bottom: -$tab-border-width;
+    border-top: $tab-border-width solid $tab-border;
+    /* 1 */
+    z-index: -1;
+}
+
+.sb-tab-grid > li:first-child > a { margin-left: $tab-margin-horizontal; }
+
+.sb-tab-grid > li > a { text-align: center; }
+
+/*
+ * If `sb-tab-bottom`
+ */
+
+.sb-tab-grid.sb-tab-bottom { border-top: none; }
+.sb-tab-grid.sb-tab-bottom:before {
+    top: -$tab-border-width;
+    bottom: auto;
+}
+
+
+/* Modifier: 'tab-left', 'tab-right'
+ ========================================================================== */
+
+/* Tablet and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .sb-tab-left,
+    .sb-tab-right { border-bottom: none; }
+
+    .sb-tab-left > li,
+    .sb-tab-right > li {
+        margin-bottom: 0;
+        float: none;
+    }
+
+    .sb-tab-left > li > a,
+    .sb-tab-right > li > a {
+        padding-top: $tab-padding-vertical;
+        padding-bottom: $tab-padding-vertical;
+    }
+
+    .sb-tab-left > li:nth-child(n+2) > a,
+    .sb-tab-right > li:nth-child(n+2) > a {
+        margin-left: 0;
+        margin-top: $tab-margin-vertical;
+    }
+
+    .sb-tab-left > li.sb-active > a,
+    .sb-tab-right > li.sb-active > a { border-color: $tab-active-border; }
+
+    /*
+     * Modifier: 'tab-left'
+     */
+
+    .sb-tab-left { border-right: $tab-border-width solid $tab-border; }
+    .sb-tab-left > li { margin-right: -$tab-border-width; }
+    .sb-tab-left > li > a {
+        border-bottom-width: $tab-border-width;
+        border-right-width: 0;
+    }
+    .sb-tab-left > li:not(.sb-active) > a:hover,
+    .sb-tab-left > li:not(.sb-active) > a:focus {
+        margin-bottom: 0;
+        margin-right: $tab-border-width;
+        padding-bottom: $tab-padding-vertical;
+        padding-right: $tab-padding-horizontal - $tab-border-width;
+    }
+    .sb-tab-left > li.sb-active > a { border-right-color: transparent; }
+
+    /*
+     * Modifier: 'tab-right'
+     */
+
+    .sb-tab-right { border-left: $tab-border-width solid $tab-border; }
+    .sb-tab-right > li { margin-left: -$tab-border-width; }
+    .sb-tab-right > li > a {
+        border-bottom-width: $tab-border-width;
+        border-left-width: 0;
+    }
+    .sb-tab-right > li:not(.sb-active) > a:hover,
+    .sb-tab-right > li:not(.sb-active) > a:focus {
+        margin-bottom: 0;
+        margin-left: $tab-border-width;
+        padding-bottom: $tab-padding-vertical;
+        padding-left: $tab-padding-horizontal - $tab-border-width;
+    }
+    .sb-tab-right > li.sb-active > a { border-left-color: transparent; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+@include hook-tab-misc();
+
+// @mixin hook-tab(){}
+// @mixin hook-tab-hover(){}
+// @mixin hook-tab-active(){}
+// @mixin hook-tab-disabled(){}
+// @mixin hook-tab-misc(){}
