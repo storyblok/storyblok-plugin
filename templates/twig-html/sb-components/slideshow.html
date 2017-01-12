@@ -1,0 +1,17 @@
+{{ blok._editable }}
+<div class="sb-slidenav-position" data-sb-slideshow="{duration: {{ blok.duration|default('500') }}, autoplay: {{ blok.autoplay ? 'true' : 'false' }}}">
+  <ul class="sb-slideshow">
+    {% for blok in blok.body %}
+      {{ blok._editable }}
+      <li>
+        {% include 'sb-components/' ~ blok.component ~ '.html' with {blok: blok} only %}
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="" class="sb-slidenav sb-slidenav-contrast sb-slidenav-previous" data-sb-slideshow-item="previous"></a>
+  <a href="" class="sb-slidenav sb-slidenav-contrast sb-slidenav-next" data-sb-slideshow-item="next"></a>
+  <ul class="sb-dotnav sb-dotnav-contrast sb-position-bottom sb-flex-center">
+    <li data-sb-slideshow-item="0"><a href=""></a></li>
+    <li data-sb-slideshow-item="1"><a href=""></a></li>
+  </ul>
+</div>

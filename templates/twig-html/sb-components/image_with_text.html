@@ -1,0 +1,28 @@
+{{ blok._editable }}
+<div class="sb-section">
+  <div class="sb-grid sb-flex-middle" data-sb-grid-margin>
+    {% if blok.layout == 'image_left' %}
+      <div class="sb-width-1-3 sb-row-first">
+        <div class="sb-panel"><img src="{{ blok.image }}" /></div>
+      </div>
+    {% endif %}
+
+      <div class="sb-width-2-3 sb-flex-middle">
+        <div class="sb-h2">
+          {{ blok.heading }}
+        </div>
+        <div class="sb-margin-bottom">
+          {{ blok.text|nl2br }}
+        </div>
+        {% if blok.button_link %}
+          <a href="{{ blok.button_link }}" class="sb-button sb-button-large">{{ blok.button_label }}</a>
+        {% endif %}
+      </div>
+
+    {% if blok.layout != 'image_left' %}
+      <div class="sb-width-1-3 sb-row-first">
+        <div class="sb-panel"><img src="{{ blok.image }}" /></div>
+      </div>
+    {% endif %}
+  </div>
+</div>

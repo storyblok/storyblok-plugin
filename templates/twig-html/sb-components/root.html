@@ -1,0 +1,23 @@
+{% if blok.component %}
+  <link href="/loja/vendor/storyblok/storyblok-plugin/assets/css/styles.css?v4" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="/loja/vendor/storyblok/storyblok-plugin/assets/js/uikit.min.js?v1"></script>
+  <script type="text/javascript" src="/loja/vendor/storyblok/storyblok-plugin/assets/js/components/slideshow.min.js?v1"></script>
+
+  {{ blok._editable }}
+  <div class="sb-root">
+  {% for blok in blok.body %}
+    {% include 'sb-components/' ~ blok.component ~ '.html' with {blok: blok} only %}
+  {% endfor %}
+  </div>
+
+  <script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
+  <script type="text/javascript">
+
+    storyblok.init();
+
+    storyblok.on('change', function() {
+      location.reload(true);
+    });
+
+  </script>
+{% endif %}

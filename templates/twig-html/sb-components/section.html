@@ -1,0 +1,6 @@
+{{ blok._editable }}
+<div class="sb-section">
+{% for blok in blok.body %}
+  {% include 'sb-components/' ~ blok.component ~ '.html' with {blok: blok} only %}
+{% endfor %}
+</div>

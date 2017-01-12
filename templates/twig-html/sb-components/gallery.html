@@ -1,0 +1,8 @@
+{{ blok._editable }}
+<div class="sb-grid sb-grid-collapse sb-grid-width-1-{{ blok.body|length }}">
+  {% for blok in blok.body %}
+    <div>
+      {% include 'sb-components/' ~ blok.component ~ '.html' with {blok: blok} only %}
+    </div>
+  {% endfor %}
+</div>

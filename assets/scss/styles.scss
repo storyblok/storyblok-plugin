@@ -1,0 +1,44 @@
+@import "uikit/uikit-mixins.scss";
+@import "uikit/uikit-variables.scss";
+@import "uikit/core/variables.scss";
+
+/* .sb-root {
+  @import "uikit/core/base.scss";
+} */
+@import "components/base.scss";
+
+// Layout
+@import "uikit/core/grid.scss";
+@import "uikit/core/cover.scss";
+
+// Elements
+@import "uikit/core/list.scss";
+@import "uikit/core/description-list.scss";
+@import "uikit/core/table.scss";
+@import "uikit/core/form.scss";
+
+// Common
+@import "uikit/core/button.scss";
+@import "uikit/core/close.scss";
+@import "uikit/core/badge.scss";
+@import "uikit/core/alert.scss";
+@import "uikit/core/thumbnail.scss";
+@import "uikit/core/overlay.scss";
+@import "uikit/core/column.scss";
+@import "uikit/core/animation.scss";
+
+// Need to be loaded last
+@import "uikit/core/text.scss";
+@import "uikit/core/utility.scss";
+@import "uikit/core/flex.scss";
+@import "uikit/core/contrast.scss";
+
+// Uikit components
+@import "uikit/components/slider.scss";
+@import "uikit/components/slideshow.scss";
+@import "uikit/components/slidenav.scss";
+@import "uikit/components/dotnav.scss";
+
+// Custom styles
+@import "components/section.scss";
+@import "components/root.scss";

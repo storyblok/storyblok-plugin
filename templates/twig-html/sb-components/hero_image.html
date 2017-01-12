@@ -1,0 +1,19 @@
+{{ blok._editable }}
+<div class="sb-hero-image sb-cover-background sb-position-relative" style="background-image: url('{{ blok.image }}')">
+  <img class="sb-invisible" src="{{ blok.image }}" />
+  <div class="sb-position-cover sb-flex sb-flex-center sb-flex-middle sb-text-center{% if blok.inverse_text_color %} sb-contrast{% endif %}">
+    <div>
+      <div class="sb-h1 sb-margin-bottom-remove">
+        {{ blok.heading }}
+      </div>
+      <div class="sb-h2 sb-margin-top-remove">
+        {{ blok.text|nl2br }}
+      </div>
+      {% if blok.button_link %}
+        <a href="{{ blok.button_link }}" class="sb-button sb-button-large">
+          {{ blok.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
