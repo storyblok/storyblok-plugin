@@ -1,0 +1,4 @@
+/vendor/
+/tests/cache/*
+/node_modules/
+.git
